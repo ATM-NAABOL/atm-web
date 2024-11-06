@@ -24,7 +24,7 @@ jobs:
     - name: Inject secret into HTML
       run: |
         echo "API_KEY_SHEETS=${{ secrets.API_KEY_APISHEETS }}" > .env
-        sed -i 's|<!-- API_KEY_SHEETS -->|${{ secrets.API_KEY_SHEETS }}|g' path/to/your/index.html
+        sed -i 's|<!-- API_KEY_PLACEHOLDER -->|${{ secrets.API_KEY_SHEETS }}|g' path/to/your/index.html
 
     - name: Build the site
       run: npm run build
