@@ -3,7 +3,7 @@ name: Deploy to Production
 on:
   push:
     branches:
-      - main
+      - user
 
 env:
   MY_SECRET: ${{ secrets.API_KEY }}
@@ -18,11 +18,13 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18'
+        node-version: '16'  # Try changing to 16 or 14 if 18 fails
+
+    - name: Clear npm cache
+      run: npm cache clean --force
 
     - name: Install dependencies
-      run: npm install
+      run: npm install --verbose  # Added verbose logging
 
     - name: Deploy
       run: npm run deploy  # Replace with your actual deployment command
-      continue-on-error: true  # Temporarily added for debugging
