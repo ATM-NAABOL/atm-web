@@ -3,12 +3,14 @@ name: Deploy to Production
 on:
   push:
     branches:
-      - user
+      - main
+
+env:
+  MY_SECRET: ${{ secrets.API_KEY }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -16,17 +18,11 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '18'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Build project
-      env:
-        MY_SECRET: ${{ secrets.MY_SECRET }}
-      run: |
-        echo "REACT_APP_MY_SECRET=$MY_SECRET" >> .env
-        npm run build
-
     - name: Deploy
-      # Add your deployment steps (e.g., deploying to a static host or cloud provider)
+      run: npm run deploy  # Replace with your actual deployment command
+      continue-on-error: true  # Temporarily added for debugging
