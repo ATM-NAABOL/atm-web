@@ -14,17 +14,19 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18'  # Try changing to 16 or 14 if 18 fails
+        node-version: '16'  # Try '14' or '16' if '18' fails
 
     - name: Clear npm cache
       run: npm cache clean --force
 
     - name: Install dependencies
-      run: npm install --verbose  # Added verbose logging
+      run: npm install --verbose  # Enable verbose logging for more detail
 
     - name: Deploy
-      run: npm run deploy  # Replace with your actual deployment command
+      run: npm run deploy  # Replace with actual deployment command
