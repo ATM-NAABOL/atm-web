@@ -523,6 +523,8 @@
 
 <script>
 showSection('Inicio');
+const API_KEY = 'AIzaSyBJuRk7BogPQDlwwPdmi9_wru1Y75xspZw';
+const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
 
 
     const sidebar = document.getElementById('sidebar');
@@ -561,8 +563,7 @@ showSection('Inicio');
         submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
     }
 
-    const API_KEY = 'AIzaSyBJuRk7BogPQDlwwPdmi9_wru1Y75xspZw';
-    const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
+    
 
     function fetchData(option) {
         const sheetNames = {
@@ -650,13 +651,11 @@ showSection('Inicio');
         event.preventDefault();
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        const sheetId = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo'; 
         const range = 'USER&PASSWORD!A:B'; 
-        const key = 'AIzaSyBJuRk7BogPQDlwwPdmi9_wru1Y75xspZw';
         const objeto = document.getElementById("display-search-container");
 
         try {
-            const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${key}`);
+            const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`);
             if (!response.ok) {
                 throw new Error('Error en la llamada a la API: ' + response.statusText);
             }
