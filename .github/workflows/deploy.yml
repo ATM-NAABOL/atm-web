@@ -4,9 +4,6 @@ on:
   user:
 env:
   MY_SECRET: ${{ secrets.API_KEY }}
-run:
-  echo "REACT_APP_MY_SECRET=$MY_SECRET" >> .env
-  npm run build
 
 jobs:
   build:
