@@ -1,7 +1,7 @@
 name: Deploy to Production
 
 on:
-  user:
+  workflow_dispatch:
 env:
   MY_SECRET: ${{ secrets.API_KEY }}
 
