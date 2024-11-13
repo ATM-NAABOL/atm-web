@@ -108,15 +108,31 @@
             transition: background-color 0.3s, padding-left 0.3s, box-shadow 0.3s;
             position: relative;
         }
-        .sidebar a:hover, .sidebar a.active {
-            background-color: rgba(231, 76, 60, 0.8);
+        .sidebar a:hover {
+            background-color: rgba(64,64,64, 0.8);
             padding-left: 30px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             transform: translateX(5px);
+
         }
+        .sidebar a.active {
+            background-color: rgba(64,64,64, 0.8);
+            padding-left: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(5px);
+            color:#F44336 ;
+        }
+
         .sidebar a:hover::before {
             transform: scale(1.05);
         }
+        .sidebar .submenu{
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #444;
+        }
+
+
         .menu {
             padding: 15px 20px;
             color: white;
@@ -131,11 +147,13 @@
         }
         .submenu a.active {
             padding: 10px 20px;
-            background-color: rgba(52, 73, 94, 0.9);
+            background-color: rgba(112, 112, 112, 0.9);
+            color: #FFA500 ;
         }
         .submenu a::before {
             margin-right: 10px;
         }
+
         .subsubmenu {
             display: none;
             padding-left: 10px;
@@ -148,9 +166,11 @@
         }
         .subsubmenu a.active {
             padding: 10px 20px;
-            background-color: rgba(52, 73, 94, 0.9);
+            background-color: rgba(153,153,153, 0.9);
             transition: background-color 0.3s, transform 0.3s;
+            color: #333333;
         }
+
         .content {
             display: flex;
             padding: 40px;
@@ -309,35 +329,35 @@
     <img src="https://naabol.gob.bo/wp-content/uploads/2024/08/Recurso-11@0.5x-8.png" alt="Logo">
 
     <div class="title1">CARTAS DE ACUERDO OPERACIONAL</div>
-    <a class="menu" href="#" onclick="toggleSubmenu('submenu1'); setActive('menu1')"><i class="fas fa-handshake"></i> CAO</a>
+    <a id="menu1" class="menu" href="#" onclick="toggleSubmenu('submenu1'); resetActiveMenu();setActive('menu1')"><i class="fas fa-handshake"></i> CAO</a>
     <div id="submenu1" class="submenu">
-        <a href="#" id="subopcion1-1" onclick="toggleSubSubmenu('subsubmenu1-1'); showContent('subopcion1-1'); setActive('subopcion1-1')"><i class="fas fa-chevron-down"></i> NACIONALES</a>
+        <a href="#" id="subopcion1-1" onclick="resetActive(); toggleSubSubmenu('subsubmenu1-1'); setActive('subopcion1-1')"><i class="fas fa-chevron-down"></i> NACIONALES</a>
         <div id="subsubmenu1-1" class="subsubmenu">
-            <a href="#" onclick="showSection('subsubopcion1-1-1'); setActive('subsubopcion1-1-1');fetchData('tablaA')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-            <a href="#" onclick="showSection('subsubopcion1-1-2'); setActive('subsubopcion1-1-2');fetchData('tablaB')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
+            <a href="#" onclick="showSection('subsubopcion1-1-1'); setActive('subsubopcion1-1-1');setActive('subopcion1-1');fetchData('tablaA')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+            <a href="#" onclick="showSection('subsubopcion1-1-2'); setActive('subsubopcion1-1-2');setActive('subopcion1-1');fetchData('tablaB')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
         </div>
-        <a href="#" id="subopcion1-2" onclick="toggleSubSubmenu('subsubmenu1-2'); showContent('subopcion1-2'); setActive('subopcion1-2')"><i class="fas fa-chevron-down"></i>INTERNACIONALES</a>
+        <a href="#" id="subopcion1-2" onclick="resetActive(); toggleSubSubmenu('subsubmenu1-2'); setActive('subopcion1-2')"><i class="fas fa-chevron-down"></i>INTERNACIONALES</a>
         <div id="subsubmenu1-2" class="subsubmenu">
-            <a href="#" onclick="showSection('subsubopcion1-2-1'); setActive('subsubopcion1-2-1');fetchData('tablaC')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-            <a href="#" onclick="showSection('subsubopcion1-2-2'); setActive('subsubopcion1-2-2');fetchData('tablaD')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
+            <a href="#" onclick="showSection('subsubopcion1-2-1'); setActive('subsubopcion1-2-1'); setActive('subopcion1-2');fetchData('tablaC')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+            <a href="#" onclick="showSection('subsubopcion1-2-2'); setActive('subsubopcion1-2-2'); setActive('subopcion1-2');fetchData('tablaD')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
         </div>
-        <a href="#" id="subopcion1-3" onclick="toggleSubSubmenu('subsubmenu1-3'); showContent('subopcion1-3'); setActive('subopcion1-3')"><i class="fas fa-chevron-down"></i> ORGANISMOS MILITARES</a>
+        <a href="#" id="subopcion1-3" onclick="resetActive(); toggleSubSubmenu('subsubmenu1-3'); setActive('subopcion1-3')"><i class="fas fa-chevron-down"></i> ORGANISMOS MILITARES</a>
         <div id="subsubmenu1-3" class="subsubmenu">
-            <a href="#" onclick="showSection('subsubopcion1-3-1'); setActive('subsubopcion1-3-1');fetchData('tablaE')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-            <a href="#" onclick="showSection('subsubopcion1-3-2'); setActive('subsubopcion1-3-2');fetchData('tablaF')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
+            <a href="#" onclick="showSection('subsubopcion1-3-1'); setActive('subsubopcion1-3-1'); setActive('subopcion1-3');fetchData('tablaE')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+            <a href="#" onclick="showSection('subsubopcion1-3-2'); setActive('subsubopcion1-3-2'); setActive('subopcion1-3');fetchData('tablaF')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
         </div>
     </div>
 
 
     <div class="title1">MANUALES Y PROCEDIMIENTOS</div>
-    <a class="menu" href="#" onclick="toggleSubmenu('submenu2'); setActive('menu2')"><i class="fas fa-book"></i>  MP</a>
+    <a class="menu" href="#" onclick="toggleSubmenu('submenu2'); resetActiveMenu();setActive('menu2')"><i class="fas fa-book"></i>  MP</a>
     <div id="submenu2" class="submenu">
         <a href="#" onclick="showSection('subseccion2a'); setActive('submenu2a'); fetchData('tablaG')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
         <a href="#" onclick="showSection('subseccion2b'); setActive('submenu2b'); fetchData('tablaH')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
     </div>
 
     <div class="title1">CONTROLADORES DE TRANSITO AEREO</div>
-    <a class="menu" href="#" onclick="toggleSubmenu('submenu3'); setActive('menu3')"><i class="fas fa-users"></i>  ATCO's</a>
+    <a class="menu" href="#" onclick="toggleSubmenu('submenu3'); resetActiveMenu(); setActive('menu3')"><i class="fas fa-users"></i>  ATCO's</a>
     <div id="submenu3" class="submenu">
         <a href="#" onclick="showSection('subseccion3a'); setActive('submenu3a'); fetchData('tablaI')"><i class="fas fa-caret-right"></i> Listado del Personal</a>
         <a href="#" onclick="showSection('subseccion3b'); setActive('submenu3b'); fetchData('tablaJ')"><i class="fas fa-caret-right"></i> Rol de Turnos</a>
@@ -345,35 +365,31 @@
 
 
     <div class="title1">REPORTE DE INCIDENTES</div>
-    <a class="menu" href="#" onclick="toggleSubmenu('submenu4'); setActive('menu4')"><i class="fas fa-exclamation-triangle"></i>  INCIDENTES</a>
-    <div id="submenu4" class="submenu">
-        <a href="#" onclick="showSection('subseccion4a'); setActive('submenu4a'); fetchData('tablaK')"><i class="fas fa-caret-right"></i> Reportes en la gestión</a>
-        <a href="#" onclick="showSection('subseccion4b'); setActive('submenu4b'); fetchData('tablaL')"><i class="fas fa-caret-right"></i> Historial de reportes</a>
-    </div>
+    <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion4a'); resetActiveMenu();; resetActive();setActive('submenu4a'); fetchData('tablaK')"><i class="fas fa-exclamation-triangle"></i>  INCIDENTES</a>
 
     <div class="title1">INSTRUCTIVOS AL PERSONAL</div>
-    <a class="menu" href="#" onclick="toggleSubmenu('submenu5'); setActive('menu5')"><i class="fas fa-file-alt"></i>  INSTRUCTIVOS</a>
+    <a class="menu" href="#" onclick="toggleSubmenu('submenu5'); resetActiveMenu();resetActive();setActive('menu5')"><i class="fas fa-file-alt"></i>  INSTRUCTIVOS</a>
     <div id="submenu5" class="submenu">
         <a href="#" onclick="showSection('subseccion5a'); setActive('submenu5a'); fetchData('tablaM')"><i class="fas fa-caret-right"></i> Instructivos en la gestión</a>
         <a href="#" onclick="showSection('subseccion5b'); setActive('submenu5b'); fetchData('tablaN')"><i class="fas fa-caret-right"></i> Historial de instructivos</a>
     </div>
 
     <div class="title1">INDICADORES CLAVE DE RENDIMIENTO</div>
-    <a class="menu" href="#" onclick="toggleSubmenu('submenu6'); setActive('menu6')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
+    <a class="menu" href="#" onclick="toggleSubmenu('submenu6'); resetActiveMenu();setActive('menu6')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
     <div id="submenu6" class="submenu">
         <a href="#" onclick="showSection('subseccion6a'); setActive('submenu6a'); fetchData('tablaO')"><i class="fas fa-caret-right"></i> Documentos KPI's</a>
         <a href="#" onclick="showSection('subseccion6b'); setActive('submenu6b')"><i class="fas fa-caret-right"></i> Dashboards KPI's</a>
     </div>
 
     <div class="title1">MEDIDAS AFTM DE LA FIR LA PAZ</div>
-    <a class="menu" href="#" onclick="toggleSubmenu('submenu7'); setActive('menu7')"><i class="fas fa-bullseye"></i>  AFTM</a>
+    <a class="menu" href="#" onclick="toggleSubmenu('submenu7'); resetActiveMenu();setActive('menu7')"><i class="fas fa-bullseye"></i>  AFTM</a>
     <div id="submenu7" class="submenu">
         <a href="#" onclick="showSection('subseccion7a'); setActive('submenu7a'); fetchData('tablaP')"><i class="fas fa-caret-right"></i> Subopción 1</a>
         <a href="#" onclick="showSection('subseccion7b'); setActive('submenu7b'); fetchData('tablaQ')"><i class="fas fa-caret-right"></i> Subopción 2</a>
     </div>
 
      <div class="title1">DOCUMENTOS NO OPERATIVOS</div>
-    <a class="menu" href="#" onclick="toggleSubmenu('submenu8'); setActive('menu8')"><i class="fas fa-folder-open"></i>  DOCUMENTOS</a>
+    <a class="menu" href="#" onclick="toggleSubmenu('submenu8'); resetActiveMenu();setActive('menu8')"><i class="fas fa-folder-open"></i>  DOCUMENTOS</a>
     <div id="submenu8" class="submenu">
         <a href="#" onclick="showSection('subseccion8a'); setActive('submenu8a'); fetchData('tablaR')"><i class="fas fa-caret-right"></i> Documentación vigente</a>
         <a href="#" onclick="showSection('subseccion8b'); setActive('submenu8b'); fetchData('tablaS')"><i class="fas fa-caret-right"></i>  Documentación pasada</a>
@@ -466,11 +482,7 @@
         <div id="dataK" class="tabla"></div>
         
     </div>
-    <div id="subseccion4b" class="section">
-        <h3>REPORTE DE INCIDENTES</h3>
-        <p>HISTORIAL DE REPORTES REGISTRADOS</p>
-        <div id="dataL" class="tabla"></div>
-    </div>
+
 
     <div id="subseccion5a" class="section">
         <h3>INSTRUCCTIVOS AL PERSONAL</h3>
@@ -543,6 +555,7 @@ const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
     function toggleSubmenu(submenuId) {
         const submenu = document.getElementById(submenuId);
         const submenus = document.querySelectorAll('.submenu');
+
         submenus.forEach(sub => {
             if (sub !== submenu) {
                 sub.style.display = 'none';
@@ -554,7 +567,7 @@ const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
     function toggleSubSubmenu(submenuId) {
         const submenu = document.getElementById(submenuId);
         const submenus = document.querySelectorAll('.subsubmenu');
-        
+
         submenus.forEach(sub => {
             if (sub !== submenu) {
                 sub.style.display = 'none';
@@ -577,8 +590,8 @@ const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
             tablaH: 'MP-PASADOS!A2:L',
             tablaI: 'ATCO!A2:P',
             tablaJ: 'RT!A2:J',
-            tablaK: 'R.INC-ACTUAL!A2:I',
-            tablaL: 'R.INC-HISTORIAL!A1:D',
+            tablaK: 'R.INCIDENTES!A2:I',
+            tablaL: '',
             tablaM: 'INS-ACTUAL!A2:G',
             tablaN: 'INST-HISTORIAL!A1:D',
             tablaO: 'PRUEBITAS!A2:D',
@@ -647,6 +660,8 @@ const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
         
     }
 
+
+
     document.getElementById('login').addEventListener('submit', async function(event) {
         event.preventDefault();
         const username = document.getElementById('username').value;
@@ -688,10 +703,12 @@ const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
     });
 
     function resetActive() {
-        const menuItems = document.querySelectorAll('.sidebar a');
-        menuItems.forEach(item => item.classList.remove('active'));
         const submenuItems = document.querySelectorAll('.submenu a');
         submenuItems.forEach(item => item.classList.remove('active'));
+    }
+    function resetActiveMenu() {
+        const menuItems = document.querySelectorAll('.sidebar a');
+        menuItems.forEach(item => item.classList.remove('active'));
     }
 
     function setActive(activeId) {
@@ -735,6 +752,13 @@ const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
                     filas[i].style.display = "none";
                 }
             }
+        });
+    }
+
+    function ocultarMenu() {
+        const submenus = document.querySelectorAll('.submenu');
+        submenus.forEach(function(submenu) {
+            submenu.style.display = 'none';
         });
     }
 </script>
