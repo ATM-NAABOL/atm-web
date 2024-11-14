@@ -566,21 +566,21 @@ function toggleSubSubmenu(submenuId) {
 
 function fetchData(option) {
     const sheetNames = {
-        tablaA: 'CAO-NAC-VIGENTES!A2:L',
-        tablaB: 'CAO-NAC-PASADOS!A2:L',
-        tablaC: 'CAO-INT-VIGENTES!A2:L',
-        tablaD: 'CAO-INT-PASADOS!A2:L',
-        tablaE: 'CAO-MIL-VIGENTES!A2:L',
-        tablaF: 'CAO-MIL-PASADOS!A2:L',
-        tablaG: 'MP-VIGENTES!A2:L',
-        tablaH: 'MP-PASADOS!A2:L',
-        tablaI: 'ATCO!A2:P',
-        tablaJ: 'RT!A2:J',
-        tablaK: 'R.INCIDENTES!A2:I',
+        tablaA: 'CAO-NAC-VIGENTES!A3:L',
+        tablaB: 'CAO-NAC-PASADOS!A3:L',
+        tablaC: 'CAO-INT-VIGENTES!A3:L',
+        tablaD: 'CAO-INT-PASADOS!A3:L',
+        tablaE: 'CAO-MIL-VIGENTES!A3:L',
+        tablaF: 'CAO-MIL-PASADOS!A3:L',
+        tablaG: 'MP-VIGENTES!A3:L',
+        tablaH: 'MP-PASADOS!A3:L',
+        tablaI: 'ATCO!A3:P',
+        tablaJ: 'RT!A3:J',
+        tablaK: 'R.INCIDENTES!A3:I',
         tablaL: '',
-        tablaM: 'INS-ACTUAL!A2:G',
-        tablaN: 'INST-HISTORIAL!A1:D',
-        tablaO: 'PRUEBITAS!A2:D',
+        tablaM: 'INS-ACTUAL!A3:G',
+        tablaN: 'INST-HISTORIAL!A3:H',
+        tablaO: 'PRUEBITAS!A3:D',
         tablaP: '',
         tablaQ: '',
         tablaR: '', 
@@ -631,6 +631,8 @@ function showSection(sectionId) {
         section.style.display = 'none';
     });
     if (['subsubopcion1-1-1', 'subsubopcion1-1-2', 'subsubopcion1-2-1', 'subsubopcion1-2-2', 'subsubopcion1-3-1', 'subsubopcion1-3-2', 'subseccion2a', 'subseccion2b', 'subseccion3a', 'subseccion3b'].includes(sectionId) && !isLoggedIn) {
+        let lastSectionId = null;
+        lastSectionId = sectionId;
         document.getElementById('login').style.display = 'flex';
         document.getElementById('errorMessage').textContent = '';
         objeto.style.display = 'none';
@@ -639,7 +641,6 @@ function showSection(sectionId) {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const range = 'USER&PASSWORD!A:B'; 
-            const objeto = document.getElementById("display-search-container");
             try {
                 const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`);
                 if (!response.ok) {
@@ -652,7 +653,6 @@ function showSection(sectionId) {
                     return;
                 }
                 let validUser = false;
-
                 for (let i = 1; i < users.length; i++) { 
                     if (users[i][0] === username && users[i][1] === password) {
                         validUser = true;
@@ -662,7 +662,7 @@ function showSection(sectionId) {
                 if (validUser) {
                     isLoggedIn = true;
                     document.getElementById('login').style.display = 'none';
-                    document.getElementById(sectionId).style.display = 'block';
+                    document.getElementById(lastSectionId).style.display = 'block';
                     objeto.style.display = 'block';
                 } else {
                     alert('Usuario o contraseña incorrectos');
@@ -679,6 +679,7 @@ function showSection(sectionId) {
     }
     resetActive();
     setActive(sectionId);
+
 }
 
 function resetActive() {
