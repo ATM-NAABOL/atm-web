@@ -432,25 +432,16 @@
                 <p id="CAOMilVig-count">Cargando...</p>
             </div>
             <div class="card">
-                <i class="fas fa-stethoscope" style="font-size: 50px"></i>
-                <h1>FUNCIONARIOS CON CERTIFICADO MEDICO VENCIDO</h1>
-                <p id="CerMed-count">Cargando...</p>
-            </div>
-            <div class="card" id="usuarios-card">
-                <i class="fas fa-comment-dots" style="font-size: 50px"></i>
-                <h1>FUNCIONARIOS CON COMPETENCIA LINGUISTICA VENCIDA</h1>
-                <p id="CompLing-count">Cargando...</p>
+                <i class="fas fa-book" style="font-size: 50px"></i>
+                <h1>NUMERO DE MANUALES VIGENTES</h1>
+                <p id="NumManProc-count">Cargando...</p>
             </div>
             <div class="card">
                 <i class="fas fa-users" style="font-size: 50px"></i>
                 <h1>NUMERO DE CONTROLADORES AEREOS</h1>
                 <p id="NumAtco-count">Cargando...</p>
             </div>
-            <div class="card">
-                <i class="fas fa-book" style="font-size: 50px"></i>
-                <h1>NUMERO DE MANUALES VIGENTES</h1>
-                <p id="NumManProc-count">Cargando...</p>
-            </div>
+
             <div class="card">
                 <i class="fas fa-exclamation-triangle" style="font-size: 50px"></i>
                 <h1>NUMERO DE REPORTE DE INCIDENTES</h1>
@@ -774,13 +765,21 @@ function ocultarMenu() {
         submenu.style.display = 'none';
     });
 }
-const today = new Date();
+function formatearFecha(fecha) {
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+    const anio = fecha.getFullYear();
+    return `${dia}/${mes}/${anio}`;
+}
+
+const today = formatearFecha(new Date());
+
 
 function loadSheetData() {
     const SHEET_NAME = 'ATCO';
-    const range = `${SHEET_NAME}!J4:J1048576`;
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`;
-    fetch(url)
+    const range0 = `${SHEET_NAME}!K4:K`;
+    const url0 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range0}?key=${API_KEY}`;
+    fetch(url0)
         .then(response => response.json())
         .then(data => {
             const rows = data.values;
@@ -797,25 +796,7 @@ function loadSheetData() {
                 console.log('No se encontraron datos.');
             }
         })
-    const range1 = `${SHEET_NAME}!I4:I1048576`;
-    const url1 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range1}?key=${API_KEY}`;
-    fetch(url1)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values;
-            if (rows && rows.length > 0) {
-                let count = 0;
-                rows.forEach(row => {
-                    const date = new Date(row[0]);
-                    if (date < today) {
-                        count++;
-                    }
-                });
-                document.getElementById('CerMed-count').textContent = count;
-            } else {
-                console.log('No se encontraron datos.');
-            }
-        })
+
     const range2 = `${SHEET_NAME}!A4:A1048576`;
     const url2 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range2}?key=${API_KEY}`;
     fetch(url2)
