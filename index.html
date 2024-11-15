@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
     <title>DOCUMENTOS ATM - NAABOL</title>
     <style>
         * {
@@ -19,9 +20,7 @@
             display: flex;
             height: 100%;
             color: #333;
-
         }
-
         .search-container {
             position: absolute;
             width: auto;
@@ -29,12 +28,10 @@
             justify-content: center;
             align-items: center;
             margin-top: 110px;
-
         }
         #display-search-container {
             display: none;
         }
-
         #buscador {
             width: 100%;
             padding: 10px 40px 10px 10px;
@@ -44,13 +41,10 @@
             outline: none;
             transition: border-color 0.3s ease;
         }
-
         #buscador:focus {
             border-color: #007bff;
             box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
         }
-
-        /* Icono de lupa */
         .search-container i {
             position: absolute;
             right: 10px;
@@ -60,7 +54,6 @@
             font-size: 16px;
             pointer-events: none;
         }
-
         .sidebar img {
             max-width: 90%;
             height: auto;
@@ -129,7 +122,6 @@
             cursor: pointer;
             border-bottom: 1px solid #444;
         }
-
         .menu {
             padding: 15px 20px;
             color: white;
@@ -138,7 +130,6 @@
             border-radius: 5px;
             font-size: 16px;
         }
-
         .submenu {
             display: none;
             padding-left: 10px;
@@ -153,12 +144,10 @@
         .submenu a::before {
             margin-right: 10px;
         }
-
         .subsubmenu {
             display: none;
             padding-left: 10px;
-            font-size: 12px;
-            
+            font-size: 12px; 
         }
         .subsubmenu a::before {
             padding: 5px 10px;
@@ -170,7 +159,6 @@
             transition: background-color 0.3s, transform 0.3s;
             color: #333333;
         }
-
         .content {
             display: flex;
             padding: 40px;
@@ -200,6 +188,13 @@
             font-weight: bold;
             color: #2c3e50; 
         }
+        .content h1 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2c3e50; 
+            text-align: center;
+        }
         .content p {
             font-size: 28px;
             line-height: 1.6;
@@ -217,13 +212,10 @@
             height: 30px;
             border-top: 2px solid #3498db;
             font-size: 10px;
-            
-
         }
         .section, .login {
             display: none;
             width: 100%;
-            max-width: 600px;
             margin: 0;
         }
         .login {
@@ -239,8 +231,6 @@
             display: flex;
             margin-top: 10%;
             margin-left: 20%;
-
-            
         }
         .login input {
             margin-bottom: 10px;
@@ -316,6 +306,29 @@
         }
         .icon-link:hover {
             color: #007bff;
+        }
+        .card-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+
+            background-color: #f7f9fb;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .card p {
+            font-size: 35px;
+            color: #34495E;
+            font-weight: bold;
+            text-align: center;
+            padding-right: 300px;
         }
     </style>
 </head>
@@ -396,17 +409,60 @@
         </div>
     </div>
 </div>
-
 <div class="content">
-    <div id="Inicio" class="section">
+    <div id="Inicio"class="section">
         <h3>Documentacion ATM - NAABOL</h3>
+        <a onclick="toggleSubmenu('submenu8'); resetActiveMenu();setActive('menu8')"> DOCUMENTOS</a>
         <p>Seleccione la opcion de su interes en el menu lateral</p>
+        <!-- Tarjetas de estadísticas -->
+        <div class="card-container">
+            <div class="card">
+                <span class="flag-icon flag-icon-bo"  style="font-size: 50px ; filter:grayscale(80%)"></span>
+                <h1>CARTAS DE ACUERDO NACIONALES VIGENTES</h1>
+                <p id="CAONacVig-count">Cargando...</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-globe-americas" style="font-size: 50px"></i>
+                <h1>CARTAS DE ACUERDO INTERNACIONALES VIGENTES</h1>
+                <p id="CAOInterVig-count">Cargando...</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-fighter-jet" style="font-size: 50px"></i>
+                <h1>CARTAS DE ACUERDO CON ORGANISMOS MILITARES VIGENTES</h1>
+                <p id="CAOMilVig-count">Cargando...</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-stethoscope" style="font-size: 50px"></i>
+                <h1>FUNCIONARIOS CON CERTIFICADO MEDICO VENCIDO</h1>
+                <p id="CerMed-count">Cargando...</p>
+            </div>
+            <div class="card" id="usuarios-card">
+                <i class="fas fa-comment-dots" style="font-size: 50px"></i>
+                <h1>FUNCIONARIOS CON COMPETENCIA LINGUISTICA VENCIDA</h1>
+                <p id="CompLing-count">Cargando...</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-users" style="font-size: 50px"></i>
+                <h1>NUMERO DE CONTROLADORES AEREOS</h1>
+                <p id="NumAtco-count">Cargando...</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-book" style="font-size: 50px"></i>
+                <h1>NUMERO DE MANUALES VIGENTES</h1>
+                <p id="NumManProc-count">Cargando...</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-exclamation-triangle" style="font-size: 50px"></i>
+                <h1>NUMERO DE REPORTE DE INCIDENTES</h1>
+                <p id="NumIncid-count">Cargando...</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-file-alt" style="font-size: 50px"></i>
+                <h1>NUMERO DE INSTRUCTIVAS</h1>
+                <p id="NumInst-count">Cargando...</p>
+            </div>
+        </div>
     </div>
-    <div id="InicioCorrecto" class="section">
-        <h3>Documentacion ATM - NAABOL</h3>
-        <p>Ha iniciado sesion exitosamente.</p>
-    </div>
-
     <div id="login" class="login">
         <h2>ATM LOGIN</h2>
         <form onsubmit="return login(event)">
@@ -416,14 +472,12 @@
             <div id="errorMessage" class="error"></div>
         </form>
     </div>
-
     <div id="display-search-container" class="search-container">
         <!-- Campo de búsqueda -->
         <input type="text" id="buscador" onkeyup="filtrarTablas()" placeholder="Buscar...">
         <!-- Icono de lupa -->
         <i class="fas fa-search"></i>
     </div>
-
     <div id="subsubopcion1-1-1" class="section">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>NACIONALES - DOCUMENTOS VIGENTES</p>
@@ -525,13 +579,13 @@
     <p>&copy; 2024 Documentacion ATM (NAABOL). Todos los derechos reservados. Prohibida su reproduccion parcial o total.</p>
 </div>
 </body>
-
 <script>
 showSection('Inicio');
+const objeto = document.getElementById("display-search-container");
+objeto.style.display = 'none';
 let isLoggedIn = false;
 const API_KEY = 'AIzaSyBJuRk7BogPQDlwwPdmi9_wru1Y75xspZw';
 const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
-
 const sidebar = document.getElementById('sidebar');
 const toggleBtn = document.getElementById('toggle-btn');
 toggleBtn.onclick = function() {
@@ -541,7 +595,6 @@ toggleBtn.onclick = function() {
         sidebar.style.display = 'block';
     }
 };
-
 function toggleSubmenu(submenuId) {
     const submenu = document.getElementById(submenuId);
     const submenus = document.querySelectorAll('.submenu');
@@ -552,7 +605,6 @@ function toggleSubmenu(submenuId) {
     });
     submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
 }
-
 function toggleSubSubmenu(submenuId) {
     const submenu = document.getElementById(submenuId);
     const submenus = document.querySelectorAll('.subsubmenu');
@@ -563,7 +615,6 @@ function toggleSubSubmenu(submenuId) {
     });
     submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
 }
-
 function fetchData(option) {
     const sheetNames = {
         tablaA: 'CAO-NAC-VIGENTES!A3:L',
@@ -574,7 +625,7 @@ function fetchData(option) {
         tablaF: 'CAO-MIL-PASADOS!A3:L',
         tablaG: 'MP-VIGENTES!A3:L',
         tablaH: 'MP-PASADOS!A3:L',
-        tablaI: 'ATCO!A3:P',
+        tablaI: 'ATCO!A3:Q',
         tablaJ: 'RT!A3:J',
         tablaK: 'R.INCIDENTES!A3:I',
         tablaL: '',
@@ -593,12 +644,10 @@ function fetchData(option) {
         .then(data => {
             const rows = data.values;
             let tableHTML = '<table><tr>';
-            // Agregar encabezados
             rows[0].forEach(header => {
                 tableHTML += `<th>${header}</th>`;
             });
             tableHTML += '</tr>';
-            // Agregar datos
             for (let i = 1; i < rows.length; i++) {
                 tableHTML += '<tr>';
                 rows[i].forEach(cell => {
@@ -623,16 +672,14 @@ function fetchData(option) {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
-
 function showSection(sectionId) {
+    lastsectionId = sectionId;
     const sections = document.querySelectorAll('.section');
     const objeto = document.getElementById("display-search-container");
     sections.forEach(section => {
         section.style.display = 'none';
     });
     if (['subsubopcion1-1-1', 'subsubopcion1-1-2', 'subsubopcion1-2-1', 'subsubopcion1-2-2', 'subsubopcion1-3-1', 'subsubopcion1-3-2', 'subseccion2a', 'subseccion2b', 'subseccion3a', 'subseccion3b'].includes(sectionId) && !isLoggedIn) {
-        let lastSectionId = null;
-        lastSectionId = sectionId;
         document.getElementById('login').style.display = 'flex';
         document.getElementById('errorMessage').textContent = '';
         objeto.style.display = 'none';
@@ -662,7 +709,7 @@ function showSection(sectionId) {
                 if (validUser) {
                     isLoggedIn = true;
                     document.getElementById('login').style.display = 'none';
-                    document.getElementById(lastSectionId).style.display = 'block';
+                    document.getElementById(sectionId).style.display = 'block';
                     objeto.style.display = 'block';
                 } else {
                     alert('Usuario o contraseña incorrectos');
@@ -679,19 +726,15 @@ function showSection(sectionId) {
     }
     resetActive();
     setActive(sectionId);
-
 }
-
 function resetActive() {
     const submenuItems = document.querySelectorAll('.submenu a');
     submenuItems.forEach(item => item.classList.remove('active'));
 }
-
 function resetActiveMenu() {
     const menuItems = document.querySelectorAll('.sidebar a');
     menuItems.forEach(item => item.classList.remove('active'));
 }
-
 function setActive(activeId) {
     const menuItem = document.querySelector(`.sidebar a[href="#"][onclick*="${activeId}"]`);
     if (menuItem) {
@@ -702,7 +745,6 @@ function setActive(activeId) {
         submenuItem.classList.add('active');
     }
 }
-
 function filtrarTablas() {
     var input = document.getElementById('buscador');
     var filtro = input.value.toLowerCase();
@@ -726,13 +768,167 @@ function filtrarTablas() {
         }
     });
 }
-
 function ocultarMenu() {
     const submenus = document.querySelectorAll('.submenu');
     submenus.forEach(function(submenu) {
         submenu.style.display = 'none';
     });
 }
-</script>
+const today = new Date();
 
+function loadSheetData() {
+    const SHEET_NAME = 'ATCO';
+    const range = `${SHEET_NAME}!J4:J1048576`;
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                let count = 0;
+                rows.forEach(row => {
+                    const date = new Date(row[0]);
+                    if (date < today) {
+                        count++;
+                    }
+                });
+                document.getElementById('CompLing-count').textContent = count;
+            } else {
+                console.log('No se encontraron datos.');
+            }
+        })
+    const range1 = `${SHEET_NAME}!I4:I1048576`;
+    const url1 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range1}?key=${API_KEY}`;
+    fetch(url1)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                let count = 0;
+                rows.forEach(row => {
+                    const date = new Date(row[0]);
+                    if (date < today) {
+                        count++;
+                    }
+                });
+                document.getElementById('CerMed-count').textContent = count;
+            } else {
+                console.log('No se encontraron datos.');
+            }
+        })
+    const range2 = `${SHEET_NAME}!A4:A1048576`;
+    const url2 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range2}?key=${API_KEY}`;
+    fetch(url2)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                let count = 0;
+                rows.forEach(row => {
+                    count++;
+                });
+                document.getElementById('NumAtco-count').textContent = count;
+            } else {
+                console.log('No se encontraron datos.');
+            }
+            })
+    const range3 = `MP-VIGENTES!A4:A1048576`;
+    const url3 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range3}?key=${API_KEY}`;
+    fetch(url3)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                let count = 0;
+                rows.forEach(row => {
+                    count++;
+                });
+                document.getElementById('NumManProc-count').textContent = count;
+            } else {
+                console.log('No se encontraron datos.');
+            }
+        })
+    const range4 = `R.INCIDENTES!A4:A1048576`;
+    const url4 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range4}?key=${API_KEY}`;
+    fetch(url4)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                let count = 0;
+                rows.forEach(row => {
+                    count++;
+                });
+                document.getElementById('NumIncid-count').textContent = count;
+            } else {
+                console.log('No se encontraron datos.');
+            }
+        })
+    const range5 = `INS-ACTUAL!A4:A1048576`;
+    const url5 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range5}?key=${API_KEY}`;
+    fetch(url5)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                let count = 0;
+                rows.forEach(row => {
+                    count++;
+                });
+                document.getElementById('NumInst-count').textContent = count;
+            } else {
+                console.log('No se encontraron datos.');
+            }
+        })
+    const range6 = `CAO-NAC-VIGENTES!A4:A1048576`;
+    const url6 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range6}?key=${API_KEY}`;
+    fetch(url6)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                let count = 0;
+                rows.forEach(row => {
+                    count++;
+                });
+                document.getElementById('CAONacVig-count').textContent = count;
+            } else {
+                console.log('No se encontraron datos.');
+            }
+        })
+    const range7 = `CAO-INT-VIGENTES!A4:A1048576`;
+    const url7 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range7}?key=${API_KEY}`;
+    fetch(url7)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                let count = 0;
+                rows.forEach(row => {
+                    count++;
+                });
+                document.getElementById('CAOInterVig-count').textContent = count;
+            } else {
+                console.log('No se encontraron datos.');
+            }
+        })
+    const range8 = `CAO-MIL-VIGENTES!A4:A1048576`;
+    const url8 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range8}?key=${API_KEY}`;
+    fetch(url8)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                let count = 0;
+                rows.forEach(row => {
+                    count++;
+                });
+                document.getElementById('CAOMilVig-count').textContent = count;
+            } else {
+                console.log('No se encontraron datos.');
+            }
+        })
+}
+window.onload = loadSheetData;
+</script>
 </html>
