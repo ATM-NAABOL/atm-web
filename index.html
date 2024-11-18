@@ -375,7 +375,7 @@
         </div>
     </div>
         <div class="title1">REPORTE DE INCIDENTES</div>
-        <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion4a'); resetActiveMenu();; resetActive();setActive('submenu4a'); fetchData('tablaK')"><i class="fas fa-exclamation-triangle"></i>  INCIDENTES</a>
+        <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion4a'); resetActiveMenu(); resetActive();setActive('submenu4a'); fetchData('tablaK')"><i class="fas fa-exclamation-triangle"></i>  INCIDENTES</a>
     <div class="opcion">
         <div class="title1">INSTRUCTIVOS AL PERSONAL</div>
         <a class="menu" href="#" onclick="toggleSubmenu('submenu5'); resetActiveMenu();resetActive();setActive('menu5')"><i class="fas fa-file-alt"></i>  INSTRUCTIVOS</a>
@@ -386,27 +386,12 @@
     </div>
     <div class="opcion">
         <div class="title1">INDICADORES CLAVE DE RENDIMIENTO</div>
-        <a class="menu" href="#" onclick="toggleSubmenu('submenu6'); resetActiveMenu();setActive('menu6')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
-        <div id="submenu6" class="submenu">
-            <a href="#" onclick="showSection('subseccion6a'); setActive('submenu6a'); fetchData('tablaO')"><i class="fas fa-caret-right"></i> Documentos KPI's</a>
-            <a href="#" onclick="showSection('subseccion6b'); setActive('submenu6b')"><i class="fas fa-caret-right"></i> Dashboards KPI's</a>
-        </div>
+        <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion6b'); resetActiveMenu(); resetActive(); setActive('submenu6b'); fetchData('tablaR')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
     </div>
+
     <div class="opcion">
-        <div class="title1">MEDIDAS AFTM DE LA FIR LA PAZ</div>
-        <a class="menu" href="#" onclick="toggleSubmenu('submenu7'); resetActiveMenu();setActive('menu7')"><i class="fas fa-bullseye"></i>  AFTM</a>
-        <div id="submenu7" class="submenu">
-            <a href="#" onclick="showSection('subseccion7a'); setActive('submenu7a'); fetchData('tablaP')"><i class="fas fa-caret-right"></i> Subopción 1</a>
-            <a href="#" onclick="showSection('subseccion7b'); setActive('submenu7b'); fetchData('tablaQ')"><i class="fas fa-caret-right"></i> Subopción 2</a>
-        </div>
-    </div>
-    <div class="opcion">
-         <div class="title1">DOCUMENTOS NO OPERATIVOS</div>
-        <a class="menu" href="#" onclick="toggleSubmenu('submenu8'); resetActiveMenu();setActive('menu8')"><i class="fas fa-folder-open"></i>  DOCUMENTOS</a>
-        <div id="submenu8" class="submenu">
-            <a href="#" onclick="showSection('subseccion8a'); setActive('submenu8a'); fetchData('tablaR')"><i class="fas fa-caret-right"></i> Documentación vigente</a>
-            <a href="#" onclick="showSection('subseccion8b'); setActive('submenu8b'); fetchData('tablaS')"><i class="fas fa-caret-right"></i>  Documentación pasada</a>
-        </div>
+         <div class="title1">DOCUMENTOS NO PERTENECIENTES A ATM</div>
+        <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion8a'); resetActiveMenu(); resetActive(); setActive('submenu8a'); fetchData('tablaR')"><i class="fas fa-folder-open"></i>  DOCUMENTOS</a>
     </div>
 </div>
 <div class="content">
@@ -560,11 +545,6 @@
         <p>DOCUMENTACION VIGENTE</p>
         <div id="dataR" class="tabla"></div>
     </div>
-    <div id="subseccion8b" class="section">
-        <h3>DOCUMENTOS NO OPERATIVOS</h3>
-        <p>DOCUMENTACION PASADA</p>
-        <div id="dataS" class="tabla"></div>
-    </div>
 </div>
 <div class="footer">
     <p>&copy; 2024 Documentacion ATM (NAABOL). Todos los derechos reservados. Prohibida su reproduccion parcial o total.</p>
@@ -622,10 +602,10 @@ function fetchData(option) {
         tablaL: '',
         tablaM: 'INS-ACTUAL!A3:G',
         tablaN: 'INST-HISTORIAL!A3:H',
-        tablaO: 'PRUEBITAS!A3:D',
+        tablaO: '',
         tablaP: '',
         tablaQ: '',
-        tablaR: '', 
+        tablaR: 'DOC-NO-ATM!A3:E', 
         tablaS: '',
     };
     const sheetName = sheetNames[option];
