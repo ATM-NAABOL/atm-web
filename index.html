@@ -622,7 +622,7 @@ function fetchData(option) {
             for (let i = 1; i < rows.length; i++) {
                 tableHTML += '<tr>';
                 rows[i].forEach(cell => {
-                    if (cell.startsWith('http') && (cell.includes('.com') || cell.includes('.org'))) {
+                    if (cell.startsWith('http') && (cell.includes('.com') || cell.includes('.org')|| cell.includes('.bo'))) {
                         tableHTML += `<td><a class="icon-link" href="${cell}" target="_blank"><i class="fas fa-file-alt"></i></a></td>`;
                     } 
                     else if (cell.includes('@')) {
