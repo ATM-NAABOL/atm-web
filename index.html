@@ -388,11 +388,15 @@
         <div class="title1">INDICADORES CLAVE DE RENDIMIENTO</div>
         <a class="menu" href="#" onclick="toggleSubmenu('submenu6'); resetActiveMenu();setActive('menu6')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
         <div id="submenu6" class="submenu">
-            <a href="#" onclick="showSection('subseccion6a'); setActive('submenu6a'); fetchData('tablaO')"><i class="fas fa-caret-right"></i> KPI's SAM</a>
+
             <a href="#" onclick="showSection('subseccion6b'); setActive('submenu6b')"><i class="fas fa-caret-right"></i> KPI's BOLIVIA</a>
+            <a href="#" onclick="showSection('subseccion6c'); setActive('submenu6c'); fetchData('tablaO')"><i class="fas fa-caret-right"></i> DOCUMENTOS KPI's</a>
         </div>
     </div>
-
+    <div class="opcion">
+        <div class="title1">MEDIDAS AFTM</div>
+        <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion7a'); resetActiveMenu(); resetActive(); setActive('submenu7a')"><i class="fas fa-bullseye"></i>  AFTM</a>
+    </div>
     <div class="opcion">
          <div class="title1">DOCUMENTOS NO PERTENECIENTES A ATM</div>
         <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion8a'); resetActiveMenu(); resetActive(); setActive('submenu8a'); fetchData('tablaR')"><i class="fas fa-folder-open"></i>  DOCUMENTOS</a>
@@ -523,22 +527,22 @@
         <p>INSTRUCTIVAS ARCHIVADAS</p>
         <div id="dataN" class="tabla"></div>
     </div>
-    <div id="subseccion6a" class="section">
-        <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
-        <p>INDICADORES CLAVE DE RENDIMIENTO SAM</p>
-        <iframe src="https://app.powerbi.com/view?r=eyJrIjoiOTc4YTZhMTQtZmE0YS00ZDUzLWI3NzgtNjIxYWZlYjU2OGI2IiwidCI6IjI2MjI4ZGNhLTcwZDMtNDkxNy04MjMzLTA4M2FjMzY1NWE5MSJ9" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-    </div>
     <div id="subseccion6b" class="section">
         <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
         <p>KPI's BOLIVIA</p>
             <iframe src="https://www.canva.com/design/DAGDSVbIs9Y/R6LVGZuKXxkDOcD2T06AlQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
     </div>
-    <div id="subseccion7a" class="section">
-        <h3>MEDIDAS AFTM DE LA FIR LA PAZ</h3>
-        <p>OPCION1</p>
-        <iframe src=""></iframe>
-        <div id="dataP" class="tabla"></div>
+    <div id="subseccion6c" class="section">
+        <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
+        <p>DOCUMENTO KPI's</p>
+        <div id="dataO" class="tabla"></div>
     </div>
+    <div id="subseccion7a" class="section">
+        <h3>MEDIDAS AFTM SAM</h3>
+        <p>INDICADORES CLAVE DE RENDIMIENTO SAM</p>
+        <iframe src="https://app.powerbi.com/view?r=eyJrIjoiOTc4YTZhMTQtZmE0YS00ZDUzLWI3NzgtNjIxYWZlYjU2OGI2IiwidCI6IjI2MjI4ZGNhLTcwZDMtNDkxNy04MjMzLTA4M2FjMzY1NWE5MSJ9" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+    </div>
+
     <div id="subseccion7b" class="section">
         <h3>MEDIDAS AFTM DE LA FIR LA PAZ</h3>
         <p>OPCION2</p>
@@ -606,7 +610,7 @@ function fetchData(option) {
         tablaL: '',
         tablaM: 'INS-ACTUAL!A3:G',
         tablaN: 'INST-HISTORIAL!A3:H',
-        tablaO: '',
+        tablaO: 'KPI!A3:E',
         tablaP: '',
         tablaQ: '',
         tablaR: 'DOC-NO-ATM!A3:E', 
