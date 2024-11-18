@@ -386,7 +386,11 @@
     </div>
     <div class="opcion">
         <div class="title1">INDICADORES CLAVE DE RENDIMIENTO</div>
-        <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion6b'); resetActiveMenu(); resetActive(); setActive('submenu6b'); fetchData('tablaR')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
+        <a class="menu" href="#" onclick="toggleSubmenu('submenu6'); resetActiveMenu();setActive('menu6')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
+        <div id="submenu6" class="submenu">
+            <a href="#" onclick="showSection('subseccion6a'); setActive('submenu6a'); fetchData('tablaO')"><i class="fas fa-caret-right"></i> KPI's SAM</a>
+            <a href="#" onclick="showSection('subseccion6b'); setActive('submenu6b')"><i class="fas fa-caret-right"></i> KPI's BOLIVIA</a>
+        </div>
     </div>
 
     <div class="opcion">
@@ -521,12 +525,12 @@
     </div>
     <div id="subseccion6a" class="section">
         <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
-        <p>DOCUMENTOS GENERADOS</p>
-        <div id="dataO" class="tabla"></div>
+        <p>INDICADORES CLAVE DE RENDIMIENTO SAM</p>
+        <iframe src="https://app.powerbi.com/view?r=eyJrIjoiOTc4YTZhMTQtZmE0YS00ZDUzLWI3NzgtNjIxYWZlYjU2OGI2IiwidCI6IjI2MjI4ZGNhLTcwZDMtNDkxNy04MjMzLTA4M2FjMzY1NWE5MSJ9" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
     </div>
     <div id="subseccion6b" class="section">
         <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
-        <p>DASHBOARDS KPI's</p>
+        <p>KPI's BOLIVIA</p>
             <iframe src="https://www.canva.com/design/DAGDSVbIs9Y/R6LVGZuKXxkDOcD2T06AlQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
     </div>
     <div id="subseccion7a" class="section">
