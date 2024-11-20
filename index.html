@@ -337,17 +337,41 @@
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
-            display: flex;
             justify-content: center;
         }
         .graficacircular{
             background-color: #f7f9fb;
             border-radius: 20px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            width: 600px;
+            width: 400px;
+            height: auto;
             padding: 25px;
             margin-bottom: 20px;
             text-align: center;
+
+        }
+        .graficas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px; 
+
+        }
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%; 
+        }
+        .chart-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        canvas {
+           width: 100%; 
         }
     </style>
 </head>
@@ -391,6 +415,7 @@
         <div id="submenu3" class="submenu">
             <a href="#" onclick="showSection('subseccion3a'); setActive('submenu3a'); fetchData('tablaI')"><i class="fas fa-caret-right"></i> Listado del Personal</a>
             <a href="#" onclick="showSection('subseccion3b'); setActive('submenu3b'); fetchData('tablaJ')"><i class="fas fa-caret-right"></i> Rol de Turnos</a>
+            <a href="#" onclick="showSection('subseccion3c'); setActive('submenu3c')"><i class="fas fa-caret-right"></i> Graficos estadisticos</a>
         </div>
     </div>
     <!--
@@ -466,7 +491,7 @@
                 <p id="NumInst-count">Cargando...</p>
             </div>
         </div>
-
+        <!--
         <h3>NIVEL DE COMPETENCIA LINGUISTICA</h3>
         <div class="graficasgroup">
             
@@ -479,6 +504,7 @@
                 <canvas id="myPieChart1"></canvas>
             </div>
         </div>
+        -->
     </div>
     <div id="login" class="login">
         <h2>ATM LOGIN</h2>
@@ -544,6 +570,31 @@
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
         <p>ROL DE TURNOS</p>
         <div id="dataJ" class="tabla"></div>
+    </div>
+    <div id="subseccion3c" class="section">
+        <h3>CONTROLADORES DE TRANSITO AEREO</h3>
+        <p>GRAFICOS ESTADISTICOS</p>
+        <p>.</p>
+        <div class="graficasgroup">
+            <div class="graficacircular" style="width: 500px; ">
+                <h1>DATOS GENERALES A NIVEL NACIONAL</h1>
+                <canvas id="myPieChart3"></canvas>
+            </div>
+        </div>
+        <div class="graficasgroup">
+            <div class="graficacircular">
+                <h1>AEROPUERTOS INTERNACIONALES Y ACC </h1>
+                <canvas id="myPieChart1"></canvas>
+            </div>
+            <div class="graficacircular">
+                <h1>AEROPUERTOS SECUNDARIOS </h1>
+                <canvas id="myPieChart2"></canvas>
+            </div>
+        </div>
+        <h3>COMPETENCIA LINGUISTICA POR REGIONAL - AEROPUERTO</h1>
+        <div id="graficas" class="graficas">
+            <div id="charts-container" class="graficas"></div>
+        </div>
     </div>
     <div id="subseccion4a" class="section">
         <h3>REPORTE DE INCIDENTES</h3>
@@ -685,13 +736,14 @@ function fetchData(option) {
         .catch(error => console.error('Error fetching data:', error));
 }
 function showSection(sectionId) {
+
     lastsectionId = sectionId;
     const sections = document.querySelectorAll('.section');
     const objeto = document.getElementById("display-search-container");
     sections.forEach(section => {
         section.style.display = 'none';
     });
-    if (['subsubopcion1-1-1', 'subsubopcion1-1-2', 'subsubopcion1-2-1', 'subsubopcion1-2-2', 'subsubopcion1-3-1', 'subsubopcion1-3-2', 'subseccion2a', 'subseccion2b', 'subseccion3a', 'subseccion3b'].includes(sectionId) && !isLoggedIn) {
+    if (['subsubopcion1-1-1', 'subsubopcion1-1-2', 'subsubopcion1-2-1', 'subsubopcion1-2-2', 'subsubopcion1-3-1', 'subsubopcion1-3-2', 'subseccion2a', 'subseccion2b', 'subseccion3a', 'subseccion3b', 'subseccion3c'].includes(sectionId) && !isLoggedIn) {
         document.getElementById('login').style.display = 'flex';
         document.getElementById('errorMessage').textContent = '';
         objeto.style.display = 'none';
@@ -794,8 +846,6 @@ function formatearFecha(fecha) {
 }
 
 const today = formatearFecha(new Date());
-
-
 function loadSheetData() {
     const SHEET_NAME = 'ATCO';
     const range0 = `${SHEET_NAME}!K4:K`;
@@ -934,114 +984,208 @@ function loadSheetData() {
 window.onload = loadSheetData;
 
 
-const range = 'GRAFICOS.ATCO!A11:B13';
-fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`)
-    .then(response => response.json())
-    .then(data => {
-        const labels = [];
-        const values = [];
-        let total = 0;
 
-        // Extraemos los datos y calculamos el total
-        data.values.forEach(row => {
-            labels.push(row[0]); // Suponemos que la primera columna es la categoría
-            const value = Number(row[1]); // Suponemos que la segunda columna son los valores
-            values.push(value);
-            total += value;
-        });
 
-        // Calculamos los porcentajes
-        const percentages = values.map(value => ((value / total) * 100).toFixed(2)); // Porcentaje con 2 decimales
 
-        const ctx = document.getElementById('myPieChart').getContext('2d');
-        const myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: values,
-                    backgroundColor: ['#171717', '#404040', '#707070','#909090'],
-                    hoverBackgroundColor: ['#36A2EB']
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                const label = tooltipItem.label;
-                                const value = tooltipItem.raw;
-                                const percentage = percentages[tooltipItem.dataIndex];
-                                return ` ${percentage}% (${value} ATCO's) `;
-                            }
-                        },
-                        bodyFont: {
-                            size: 18 // Tamaño de fuente para el cuerpo del tooltip (el que tiene el label)
-                        },
-                    }
-                }
+                        
+function crearGraficaCircular(rango, canvasId, hoverColors) {
+    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${rango}?key=${API_KEY}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar los datos');
             }
-        });
-    });
-
-
-const range1 = 'GRAFICOS.ATCO!D10:E13';
-fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range1}?key=${API_KEY}`)
-    .then(response => response.json())
-    .then(data => {
-        const labels = [];
-        const values = [];
-        let total = 0;
-
-        // Extraemos los datos y calculamos el total
-        data.values.forEach(row => {
-            labels.push(row[0]); // Suponemos que la primera columna es la categoría
-            const value = Number(row[1]); // Suponemos que la segunda columna son los valores
-            values.push(value);
-            total += value;
-        });
-
-        // Calculamos los porcentajes
-        const percentages = values.map(value => ((value / total) * 100).toFixed(2)); // Porcentaje con 2 decimales
-
-        const ctx = document.getElementById('myPieChart1').getContext('2d');
-        const myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: values,
-                    backgroundColor: ['#171717', '#404040', '#707070','#909090'],
-                    hoverBackgroundColor: ['#FFCE56']
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                const label = tooltipItem.label;
-                                const value = tooltipItem.raw;
-                                const percentage = percentages[tooltipItem.dataIndex];
-                                return ` ${percentage}% (${value} ATCO's) `;
-                            }
+            return response.json();
+        })
+        .then(data => {
+            const labels = [];
+            const values = [];
+            let total = 0;
+            data.values.forEach(row => {
+                labels.push(row[0]);
+                const value = Number(row[1]);
+                values.push(value);
+                total += value;
+            });
+            const percentages = values.map(value => ((value / total) * 100).toFixed(2));
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const backgroundColors = ['#000000','#171717', '#404040', '#707070', '#909090'];
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: backgroundColors,
+                        hoverBackgroundColor: hoverColors 
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
                         },
-                        bodyFont: {
-                            size: 18 // Tamaño de fuente para el cuerpo del tooltip (el que tiene el label)
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const label = tooltipItem.label;
+                                    const value = tooltipItem.raw;
+                                    const percentage = percentages[tooltipItem.dataIndex];
+                                    return ` ${percentage}% (${value} ATCO's) `;
+                                }
+                            },
+                            bodyFont: {
+                                size: 18
+                            },
                         }
                     }
                 }
-            }
+            });
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
         });
-    });
+}
+const hoverColors1 = ['#36A2EB'];
+const hoverColors2 = ['#FFCE56'];
+const hoverColors3 = ['#7EC8A9'];
+crearGraficaCircular('GRAFICOS.ATCO!A11:B13', 'myPieChart1', hoverColors1);
+crearGraficaCircular('GRAFICOS.ATCO!D10:E13', 'myPieChart2', hoverColors2);
+crearGraficaCircular('GRAFICOS.ATCO!G10:H13', 'myPieChart3', hoverColors3);
 
+
+
+
+
+const backgroundColorsGrafica = [
+    '#000000',
+    '#171717',
+    '#404040',
+    '#707070',
+    '#909090'
+];
+const hoverColorsGrafica = [
+    'rgba(255, 99, 132, 1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)'
+];
+function fetchSheetDataGrafica(rangeGrafica, chartContainerIdGrafica, chartTypeGrafica = 'bar') {
+    const urlGrafica = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${rangeGrafica}?key=${API_KEY}`;
+    fetch(urlGrafica)
+        .then(response => response.json())
+        .then(data => {
+            const rowsGrafica = data.values;
+            if (!rowsGrafica || rowsGrafica.length === 0) {
+                console.error('No se encontraron datos en el rango especificado');
+                return;
+            }
+            const labelsGrafica = rowsGrafica[0].slice(1); // Eliminar la primera celda de la primera fila
+            const datasetsGrafica = [];
+
+            for (let i = 1; i < rowsGrafica.length; i++) {
+                const datasetGrafica = {
+                    label: rowsGrafica[i][0],
+                    data: rowsGrafica[i].slice(1).map(value => parseFloat(value) || 0),
+                    backgroundColor: backgroundColorsGrafica[i % backgroundColorsGrafica.length],
+                    borderColor: backgroundColorsGrafica[i % backgroundColorsGrafica.length],
+                    borderWidth: 1,
+                    hoverBackgroundColor: hoverColorsGrafica[i % hoverColorsGrafica.length],
+                    hoverBorderColor: hoverColorsGrafica[i % hoverColorsGrafica.length]
+                };
+                datasetsGrafica.push(datasetGrafica);
+            }
+            createChartGrafica(labelsGrafica, datasetsGrafica, chartContainerIdGrafica, chartTypeGrafica);
+        })
+        .catch(error => console.error('Error al cargar los datos de Google Sheets:', error));
+}
+function createChartGrafica(labelsGrafica, datasetsGrafica, chartContainerIdGrafica, chartTypeGrafica) {
+    const containerGrafica = document.getElementById(chartContainerIdGrafica);
+    const canvasGrafica = document.createElement('canvas');
+    canvasGrafica.style.height = '500px';
+    containerGrafica.appendChild(canvasGrafica);
+    const ctxGrafica = canvasGrafica.getContext('2d');
+    new Chart(ctxGrafica, {
+        type: chartTypeGrafica, 
+        data: {
+            labels: labelsGrafica,
+            datasets: datasetsGrafica
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (tooltipItemsGrafica) => {
+                            return tooltipItemsGrafica[0].label;
+                        },
+                        label: (tooltipItemGrafica) => {
+                            let sumGrafica = 0;
+                            tooltipItemGrafica.chart.data.datasets.forEach((datasetGrafica) => {
+                                sumGrafica += datasetGrafica.data[tooltipItemGrafica.dataIndex];
+                            });
+
+                            const valueGrafica = tooltipItemGrafica.raw;
+                            const percentageGrafica = ((valueGrafica / sumGrafica) * 100).toFixed(2);
+                            return `${tooltipItemGrafica.dataset.label}: ${valueGrafica} (${percentageGrafica}%)`;
+                        }
+                    },
+                    bodyFont: {
+                        size: 18
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    stacked: true,
+                    beginAtZero: true
+                },
+                x: {
+                    stacked: true
+                }
+            }
+        }
+    });
+}
+function loadGraphsGrafica() {
+    const rangesGrafica = [
+        { rangeGrafica: 'GRAFICOS.ATCO!A18:I22', containerIdGrafica: 'chart1', typeGrafica: 'bar', titleGrafica: 'REGIONAL LA PAZ' },
+        { rangeGrafica: 'GRAFICOS.ATCO!A24:G28', containerIdGrafica: 'chart2', typeGrafica: 'bar', titleGrafica: 'REGIONAL COCHABAMBA' },
+        { rangeGrafica: 'GRAFICOS.ATCO!A30:F34', containerIdGrafica: 'chart3', typeGrafica: 'bar', titleGrafica: 'REGIONAL BENI' },
+        { rangeGrafica: 'GRAFICOS.ATCO!A36:F40', containerIdGrafica: 'chart4', typeGrafica: 'bar', titleGrafica: 'REGIONAL SANTA CRUZ' },
+    ];
+    rangesGrafica.forEach((rangeGrafica) => {
+        const titleElementGrafica = document.createElement('h3');
+        titleElementGrafica.classList.add('chart-title');
+        titleElementGrafica.textContent = rangeGrafica.titleGrafica;
+        const divGrafica = document.createElement('div');
+        divGrafica.id = rangeGrafica.containerIdGrafica;
+        divGrafica.classList.add('chart-container');
+        const chartWrapperGrafica = document.createElement('div');
+        chartWrapperGrafica.classList.add('chart-wrapper');
+        chartWrapperGrafica.appendChild(titleElementGrafica);
+        chartWrapperGrafica.appendChild(divGrafica);
+        document.getElementById('charts-container').appendChild(chartWrapperGrafica); 
+        fetchSheetDataGrafica(rangeGrafica.rangeGrafica, rangeGrafica.containerIdGrafica, rangeGrafica.typeGrafica);
+    });
+}
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            loadGraphsGrafica();
+            observer.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.5
+});
+const sectionGrafica = document.getElementById('graficas');
+observer.observe(sectionGrafica);
+        
 </script>
 </html>
