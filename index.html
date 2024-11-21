@@ -343,7 +343,7 @@
             background-color: #f7f9fb;
             border-radius: 20px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: auto;
             height: auto;
             padding: 25px;
             margin-bottom: 20px;
@@ -371,8 +371,8 @@
             font-weight: bold;
         }
         canvas {
-           width: 100%; 
-           min-height: 300px;
+           width: 100% !important; 
+           min-height: 400px !important;
         }
     </style>
 </head>
@@ -1112,7 +1112,7 @@ function fetchSheetDataGrafica(rangeGrafica, chartContainerIdGrafica, chartTypeG
 function createChartGrafica(labelsGrafica, datasetsGrafica, chartContainerIdGrafica, chartTypeGrafica) {
     const containerGrafica = document.getElementById(chartContainerIdGrafica);
     const canvasGrafica = document.createElement('canvas');
-    canvasGrafica.style.height = '500px';
+    canvasGrafica.style.height = '500px !important';
     containerGrafica.appendChild(canvasGrafica);
     const ctxGrafica = canvasGrafica.getContext('2d');
     new Chart(ctxGrafica, {
