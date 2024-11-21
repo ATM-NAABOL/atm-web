@@ -16,12 +16,11 @@
             font-family: 'Corbel', sans-serif;
         }
         body {
-            font-family: 'Roboto', sans-serif;
             margin: 0;
             display: flex;
             height: 100%;
             color: #333;
-
+/*BUSCADOR*/
         }
         .search-container {
             position: absolute;
@@ -56,13 +55,14 @@
             font-size: 16px;
             pointer-events: none;
         }
+/*IMAGENES DEL MENU LATERAL*/
         .sidebar img {
             max-width: 90%;
             height: auto;
             margin-bottom: 20px;
             padding: 2px;
             margin-top: 30px;
-
+/*MENU LATERAL*/
         }
         .sidebar {
 
@@ -74,7 +74,7 @@
             box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
             transition: width 0.3s;
             text-align: center; 
-
+/*FORMATOS DE TEXTO DEL MENU LATERAL*/
         }
         .sidebar h1 {
             font-size: 15px;
@@ -122,6 +122,7 @@
         .sidebar a:hover::before {
             transform: scale(1.05);
         }
+/*OPCIONES DEL MENU LATERAL*/
         .sidebar .submenu{
             padding: 15px;
             cursor: pointer;
@@ -139,7 +140,6 @@
             display: none;
             padding-left: 10px;
             font-size: 14px;
-
         }
         .submenu a.active {
             padding: 10px 20px;
@@ -164,6 +164,7 @@
             transition: background-color 0.3s, transform 0.3s;
             color: #333333;
         }
+/*AREA DEL CONTENIDO*/
         .content {
             display: flex;
             padding: 40px;
@@ -171,7 +172,7 @@
             height: auto;
             margin: 10px;
             transition: margin-left 0.3s;
-
+/*BOTON OCULTA O MUESTRA MENU LATERAL*/
         }
         #toggle-btn {
             position: absolute;
@@ -180,6 +181,7 @@
             cursor: pointer;
             color: #3498db;
         }
+/*FORMATOS DE TEXTO DEL CONTENIDO*/
         .content h3 {
             font-size: 34px;
             margin-bottom: 20px;
@@ -205,6 +207,7 @@
             color: #34495e;
 
         }
+/*PIE DE PAGINA CON COPYRIGHT*/
         .footer {
             text-align: center;
             padding: 10px;
@@ -217,6 +220,7 @@
             border-top: 2px solid #3498db;
             font-size: 10px;
         }
+/*LOGIN (USUARIO Y CONTRASEÑA)*/
         .section, .login {
             display: none;
             width: 100%;
@@ -263,6 +267,7 @@
             color: red;
             text-align: center;
         }
+/*OPCIONES PRINCIPALES DEL MENU LATERAL*/
         .title1 {
             padding-left: 10px;
             font-size: 12px;
@@ -271,12 +276,14 @@
             font-weight: bold;
             text-align: center;
         }
+/*PAGINAS IMPORTADAS POR URL*/
         iframe {     
             width: 80vw;
             height: 80vh; 
             position: relative; 
             border: none;
         }
+/*ESTILO DE TABLA*/
         table {
             width: 80vw;
             height: 100%;
@@ -285,7 +292,6 @@
             margin-top: 50px;
             background-color: #ffffff;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-
         }
         th, td {
             border: 1px solid #ccc;
@@ -311,6 +317,7 @@
         .icon-link:hover {
             color: #007bff;
         }
+/*CUADROS DE PAGINA QUE SE MUESTRA AL CARGAR LA PAGINA*/
         .card-container {
             display: flex;
             gap: 20px;
@@ -333,6 +340,7 @@
             font-weight: bold;
             text-align: center;
         }
+/*ESTILO DE GRAFICAS*/
         .graficasgroup{
             display: flex;
             gap: 20px;
@@ -348,7 +356,6 @@
             padding: 25px;
             margin-bottom: 20px;
             text-align: center;
-
         }
         .graficas {
             display: flex;
@@ -356,7 +363,6 @@
             justify-content: center;
             gap: 20px;
             padding: 20px; 
-
         }
         .chart-container {
             display: flex;
@@ -377,10 +383,13 @@
     </style>
 </head>
 <body>
-
+<!--***************OCULTA O MUESTRA MENU LATERAL***************-->
 <div id="toggle-btn">☰ ATM</div>
+<!--***************AREA DEL MENU LATERAL***************-->
 <div class="sidebar" id="sidebar">
+    <!--***************LOGO NAABOL***************-->
     <img src="https://naabol.gob.bo/wp-content/uploads/2024/08/Recurso-11@0.5x-8.png" alt="Logo">
+    <!--***************OPCIONES DEL MENU LATERAL***************-->
     <div class="opcion">
         <div class="title1">CARTAS DE ACUERDO OPERACIONAL</div>
         <a id="menu1" class="menu" href="#" onclick="toggleSubmenu('submenu1'); resetActiveMenu();setActive('menu1')"><i class="fas fa-handshake"></i> CAO</a>
@@ -449,7 +458,9 @@
         <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion8a'); resetActiveMenu(); resetActive(); setActive('submenu8a'); fetchData('tablaR')"><i class="fas fa-folder-open"></i>  DOCUMENTOS</a>
     </div>
 </div>
+<!--***************AREA DEL CONTENIDO*************** -->
 <div class="content">
+    <!--***************SECCION QUE SE MUESTRA AL CARGAR LA PAGINA*************** -->
     <div id="Inicio"class="section">
         <h3>Documentacion ATM - NAABOL</h3>
         <p>Seleccione la opcion de su interes en el menu lateral</p>
@@ -492,21 +503,8 @@
                 <p id="NumInst-count">Cargando...</p>
             </div>
         </div>
-        <!--
-        <h3>NIVEL DE COMPETENCIA LINGUISTICA</h3>
-        <div class="graficasgroup">
-            
-            <div class="graficacircular">
-                <h1>AEROPUERTOS INTERNACIONALES Y ACC </h1>
-                <canvas id="myPieChart"></canvas>
-            </div>
-            <div class="graficacircular">
-                <h1>AEROPUERTOS SECUNDARIOS </h1>
-                <canvas id="myPieChart1"></canvas>
-            </div>
-        </div>
-        -->
     </div>
+    <!--***************CAMPO PARA LOGIN (USUARIO Y CONTRASEÑA)***************-->
     <div id="login" class="login">
         <h2>ATM LOGIN</h2>
         <form onsubmit="return login(event)">
@@ -522,6 +520,7 @@
         <!-- Icono de lupa -->
         <i class="fas fa-search"></i>
     </div>
+    <!--***************CONTENIDO DE LAS OPCIONES***************-->
     <div id="subsubopcion1-1-1" class="section">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>NACIONALES - DOCUMENTOS VIGENTES</p>
@@ -595,6 +594,24 @@
         <div id="graficas" class="graficas">
             <div id="charts-container" class="graficas"></div>
         </div>
+        <div class="graficasgroup">
+            <div class="graficacircular">
+                <h1>REGIONAL LA PAZ </h1>
+                <canvas id="myPieChart4"></canvas>
+            </div>
+            <div class="graficacircular">
+                <h1>REGIONAL COCHABAMBA </h1>
+                <canvas id="myPieChart5"></canvas>
+            </div>
+            <div class="graficacircular">
+                <h1>REGIONAL BENI </h1>
+                <canvas id="myPieChart6"></canvas>
+            </div>
+            <div class="graficacircular">
+                <h1>REGIONAL SANTA CRUZ </h1>
+                <canvas id="myPieChart7"></canvas>
+            </div>
+        </div>
     </div>
     <div id="subseccion4a" class="section">
         <h3>REPORTE DE INCIDENTES</h3>
@@ -638,17 +655,24 @@
         <div id="dataR" class="tabla"></div>
     </div>
 </div>
+<!--***************PIE DE PAGINA CON COPYRIGHT***************-->
 <div class="footer">
     <p>&copy; 2024 Documentacion ATM (NAABOL). Todos los derechos reservados. Prohibida su reproduccion parcial o total.</p>
 </div>
 </body>
+
 <script>
+//***************DATOS SENCIBLES*************** 
+const API_KEY = 'AIzaSyBJuRk7BogPQDlwwPdmi9_wru1Y75xspZw';
+const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
+
+//***************OPCIONES POR DEFECTO AL CARGAR LA PAGINA***************
 showSection('Inicio');
 const objeto = document.getElementById("display-search-container");
 objeto.style.display = 'none';
 let isLoggedIn = false;
-const API_KEY = 'AIzaSyBJuRk7BogPQDlwwPdmi9_wru1Y75xspZw';
-const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
+
+//***************MUESTRA O OCULTA SIDE BAR AL PULSAR ICONO SUPERIOR IZQUIERDO***************
 const sidebar = document.getElementById('sidebar');
 const toggleBtn = document.getElementById('toggle-btn');
 toggleBtn.onclick = function() {
@@ -658,6 +682,26 @@ toggleBtn.onclick = function() {
         sidebar.style.display = 'block';
     }
 };
+
+//***************FUNCIONES NECESARIAS PARA LA INTERACCION Y ESTILOS DEL SIDEBAR***
+function resetActive() {
+    const submenuItems = document.querySelectorAll('.submenu a');
+    submenuItems.forEach(item => item.classList.remove('active'));
+}
+function resetActiveMenu() {
+    const menuItems = document.querySelectorAll('.sidebar a');
+    menuItems.forEach(item => item.classList.remove('active'));
+}
+function setActive(activeId) {
+    const menuItem = document.querySelector(`.sidebar a[href="#"][onclick*="${activeId}"]`);
+    if (menuItem) {
+        menuItem.classList.add('active');
+    }
+    const submenuItem = document.querySelector(`.submenu a[href="#"][onclick*="${activeId}"]`);
+    if (submenuItem) {
+        submenuItem.classList.add('active');
+    }
+}
 function toggleSubmenu(submenuId) {
     const submenu = document.getElementById(submenuId);
     const submenus = document.querySelectorAll('.submenu');
@@ -678,14 +722,14 @@ function toggleSubSubmenu(submenuId) {
     });
     submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
 }
+
+//***************OCULTA EL BUSCADOR CUANDO SE EJECUTA LA FUNCION***************
 function HideSearch(){
     const objeto = document.getElementById("display-search-container");
     objeto.style.display = 'none';
 }
-function ShowSearch(){
-    const objeto = document.getElementById("display-search-container");
-    objeto.style.display = 'block';
-}
+
+//***************FUNCION QUE CREA LAS TABLAS Y LES DA FORMATO SEGUN EL CONTENIDO DE LA TABLA***************
 function fetchData(option) {
     const sheetNames = {
         tablaA: 'CAO-NAC-VIGENTES!A3:L',
@@ -723,12 +767,15 @@ function fetchData(option) {
                 tableHTML += '<tr>';
                 rows[i].forEach(cell => {
                     if (cell.startsWith('http') && (cell.includes('.com') || cell.includes('.org')|| cell.includes('.bo'))) {
+                        //***************SI ES UNA URL LE PONDRA ICONO DE DOCUMENTO***************
                         tableHTML += `<td><a class="icon-link" href="${cell}" target="_blank"><i class="fas fa-file-alt"></i></a></td>`;
                     } 
                     else if (cell.includes('@')) {
+                        //***************SI HAY ALGUNA @ LE PONDRA ICONO DE MAIL***************
                         tableHTML += `<td><a class="icon-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=${cell}" target="_blank"><i class="fas fa-envelope"></i></a></td>`;
                     } 
                     else if (/^[a-zA-Z0-9-_]{33}$/.test(cell)) {
+                        //***************SI ES LA ID DE UNA URL(SOLO LA ID) LE PONDRA ICONO DE PERSONA, PUES DEBERA SER UNA FOTO***************
                         tableHTML += `<td><a class="icon-link" href="https://drive.google.com/file/d/${cell}/view?usp=drive_link" target="_blank"><i class="fas fa-user"></i></a></td>`;
                     } 
                     else {
@@ -743,6 +790,8 @@ function fetchData(option) {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
+
+//***************FUNCION MUESTRA LA OPCION ELEGIDA DEL SIDEBAR Y DETERMINA SI NECESIATA LOGIN***************
 function showSection(sectionId) {
 
     lastsectionId = sectionId;
@@ -751,6 +800,7 @@ function showSection(sectionId) {
     sections.forEach(section => {
         section.style.display = 'none';
     });
+    //***************OPCIONES A LAS QUE SE REQUIERE LOGIN PARA ACCEDER***************
     if (['subsubopcion1-1-1', 'subsubopcion1-1-2', 'subsubopcion1-2-1', 'subsubopcion1-2-2', 'subsubopcion1-3-1', 'subsubopcion1-3-2', 'subseccion2a', 'subseccion2b', 'subseccion3a', 'subseccion3b', 'subseccion3c'].includes(sectionId) && !isLoggedIn) {
         document.getElementById('login').style.display = 'flex';
         document.getElementById('errorMessage').textContent = '';
@@ -799,24 +849,9 @@ function showSection(sectionId) {
     resetActive();
     setActive(sectionId);
 }
-function resetActive() {
-    const submenuItems = document.querySelectorAll('.submenu a');
-    submenuItems.forEach(item => item.classList.remove('active'));
-}
-function resetActiveMenu() {
-    const menuItems = document.querySelectorAll('.sidebar a');
-    menuItems.forEach(item => item.classList.remove('active'));
-}
-function setActive(activeId) {
-    const menuItem = document.querySelector(`.sidebar a[href="#"][onclick*="${activeId}"]`);
-    if (menuItem) {
-        menuItem.classList.add('active');
-    }
-    const submenuItem = document.querySelector(`.submenu a[href="#"][onclick*="${activeId}"]`);
-    if (submenuItem) {
-        submenuItem.classList.add('active');
-    }
-}
+
+
+//***************FUNCION NECESARIA PARA EL BUSCADOR***************
 function filtrarTablas() {
     var input = document.getElementById('buscador');
     var filtro = input.value.toLowerCase();
@@ -840,162 +875,51 @@ function filtrarTablas() {
         }
     });
 }
+
+//***************FUNCION NECESARIA PARA OPCIONES DEL SIDEBAR QUE NO TENGAN SUBOPCIONES***************
 function ocultarMenu() {
     const submenus = document.querySelectorAll('.submenu');
     submenus.forEach(function(submenu) {
         submenu.style.display = 'none';
     });
 }
-function formatearFecha(fecha) {
-    const dia = String(fecha.getDate()).padStart(2, '0');
-    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-    const anio = fecha.getFullYear();
-    return `${dia}/${mes}/${anio}`;
+
+//***************CUENTA ELEMENTOS EN TABLAS DE UN RANGO DADO***************
+const ranges = [
+    { range: 'ATCO!K4:K', elementId: 'CompLing-count' },
+    { range: 'ATCO!A4:A1048576', elementId: 'NumAtco-count' },
+    { range: 'MP-VIGENTES!A4:A1048576', elementId: 'NumManProc-count' },
+    { range: 'R.INCIDENTES!A4:A1048576', elementId: 'NumIncid-count' },
+    { range: 'INS-ACTUAL!A4:A1048576', elementId: 'NumIncid-count' },
+    { range: 'INS-ACTUAL!A4:A1048576', elementId: 'NumInst-count' },
+    { range: 'CAO-NAC-VIGENTES!A4:A1048576', elementId: 'CAONacVig-count' },
+    { range: 'CAO-INT-VIGENTES!A4:A1048576', elementId: 'CAOInterVig-count' },
+    { range: 'CAO-MIL-VIGENTES!A4:A1048576', elementId: 'CAOMilVig-count' }
+];
+function CountElementsTable(range, elementId) {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                const count = rows.length;
+                document.getElementById(elementId).textContent = count;
+            } else {
+                console.log(`No se encontraron datos en el rango: ${range}`);
+                document.getElementById(elementId).textContent = 0;
+            }
+        })
+        .catch(error => {
+            console.error(`Error al obtener los datos de ${range}:`, error);
+            document.getElementById(elementId).textContent = 'Error';
+        });
 }
+ranges.forEach(item => {
+    CountElementsTable(item.range, item.elementId);
+});
 
-const today = formatearFecha(new Date());
-function loadSheetData() {
-    const SHEET_NAME = 'ATCO';
-    const range0 = `${SHEET_NAME}!K4:K`;
-    const url0 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range0}?key=${API_KEY}`;
-    fetch(url0)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values;
-            if (rows && rows.length > 0) {
-                let count = 0;
-                rows.forEach(row => {
-                    const date = new Date(row[0]);
-                    if (date < today) {
-                        count++;
-                    }
-                });
-                document.getElementById('CompLing-count').textContent = count;
-            } else {
-                console.log('No se encontraron datos.');
-            }
-        })
-
-    const range2 = `${SHEET_NAME}!A4:A1048576`;
-    const url2 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range2}?key=${API_KEY}`;
-    fetch(url2)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values;
-            if (rows && rows.length > 0) {
-                let count = 0;
-                rows.forEach(row => {
-                    count++;
-                });
-                document.getElementById('NumAtco-count').textContent = count;
-            } else {
-                console.log('No se encontraron datos.');
-            }
-            })
-    const range3 = `MP-VIGENTES!A4:A1048576`;
-    const url3 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range3}?key=${API_KEY}`;
-    fetch(url3)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values;
-            if (rows && rows.length > 0) {
-                let count = 0;
-                rows.forEach(row => {
-                    count++;
-                });
-                document.getElementById('NumManProc-count').textContent = count;
-            } else {
-                console.log('No se encontraron datos.');
-            }
-        })
-    const range4 = `R.INCIDENTES!A4:A1048576`;
-    const url4 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range4}?key=${API_KEY}`;
-    fetch(url4)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values;
-            if (rows && rows.length > 0) {
-                let count = 0;
-                rows.forEach(row => {
-                    count++;
-                });
-                document.getElementById('NumIncid-count').textContent = count;
-            } else {
-                console.log('No se encontraron datos.');
-            }
-        })
-    const range5 = `INS-ACTUAL!A4:A1048576`;
-    const url5 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range5}?key=${API_KEY}`;
-    fetch(url5)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values;
-            if (rows && rows.length > 0) {
-                let count = 0;
-                rows.forEach(row => {
-                    count++;
-                });
-                document.getElementById('NumInst-count').textContent = count;
-            } else {
-                console.log('No se encontraron datos.');
-            }
-        })
-    const range6 = `CAO-NAC-VIGENTES!A4:A1048576`;
-    const url6 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range6}?key=${API_KEY}`;
-    fetch(url6)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values;
-            if (rows && rows.length > 0) {
-                let count = 0;
-                rows.forEach(row => {
-                    count++;
-                });
-                document.getElementById('CAONacVig-count').textContent = count;
-            } else {
-                console.log('No se encontraron datos.');
-            }
-        })
-    const range7 = `CAO-INT-VIGENTES!A4:A1048576`;
-    const url7 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range7}?key=${API_KEY}`;
-    fetch(url7)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values;
-            if (rows && rows.length > 0) {
-                let count = 0;
-                rows.forEach(row => {
-                    count++;
-                });
-                document.getElementById('CAOInterVig-count').textContent = count;
-            } else {
-                console.log('No se encontraron datos.');
-            }
-        })
-    const range8 = `CAO-MIL-VIGENTES!A4:A1048576`;
-    const url8 = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range8}?key=${API_KEY}`;
-    fetch(url8)
-        .then(response => response.json())
-        .then(data => {
-            const rows = data.values;
-            if (rows && rows.length > 0) {
-                let count = 0;
-                rows.forEach(row => {
-                    count++;
-                });
-                document.getElementById('CAOMilVig-count').textContent = count;
-            } else {
-                console.log('No se encontraron datos.');
-            }
-        })
-}
-window.onload = loadSheetData;
-
-
-
-
-
-                        
+//***************GRAFICOS CIRCULARES NIVEL DE COMPETENCIA LINGUISTICA***************                  
 function crearGraficaCircular(rango, canvasId, hoverColors) {
     fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${rango}?key=${API_KEY}`)
         .then(response => {
@@ -1057,14 +981,19 @@ function crearGraficaCircular(rango, canvasId, hoverColors) {
 const hoverColors1 = ['#36A2EB'];
 const hoverColors2 = ['#FFCE56'];
 const hoverColors3 = ['#7EC8A9'];
-crearGraficaCircular('GRAFICOS.ATCO!A11:B13', 'myPieChart1', hoverColors1);
-crearGraficaCircular('GRAFICOS.ATCO!D10:E13', 'myPieChart2', hoverColors2);
-crearGraficaCircular('GRAFICOS.ATCO!G10:H13', 'myPieChart3', hoverColors3);
+const hoverColors4 = ['#005D8E'];
+const hoverColors5 = ['#4C9A2A'];
+const hoverColors6 = ['#FFB81C'];
+const hoverColors7 = ['#D32F2F'];
+crearGraficaCircular('GRAFICOS.ATCO!A11:B13', 'myPieChart1', hoverColors1);//ACC SLLP SLCB SLVR
+crearGraficaCircular('GRAFICOS.ATCO!D10:E13', 'myPieChart2', hoverColors2);//ATO SECUNDARIOS
+crearGraficaCircular('GRAFICOS.ATCO!G10:H13', 'myPieChart3', hoverColors3);//DATOS GENERALES
+crearGraficaCircular('GRAFICOS.ATCO!J19:K22', 'myPieChart4', hoverColors4);//REGIONAL LA PAZ
+crearGraficaCircular('GRAFICOS.ATCO!J25:K28', 'myPieChart5', hoverColors5);//REGIONAL COCHABAMBA
+crearGraficaCircular('GRAFICOS.ATCO!J31:K34', 'myPieChart6', hoverColors6);//REGIONAL BENI
+crearGraficaCircular('GRAFICOS.ATCO!J37:K40', 'myPieChart7', hoverColors7);//REGIONAL SANTA CRUZ
 
-
-
-
-
+//***************GRAFICOS DE BARRA NIVEL DE COMPETENCIA LINGUISTICA POR REGIONALES - AEROPUERTO***************
 const backgroundColorsGrafica = [
     '#000000',
     '#171717',
