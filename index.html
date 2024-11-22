@@ -802,9 +802,15 @@ function showSection(sectionId) {
     });
     //***************OPCIONES A LAS QUE SE REQUIERE LOGIN PARA ACCEDER***************
     if (['subsubopcion1-1-1', 'subsubopcion1-1-2', 'subsubopcion1-2-1', 'subsubopcion1-2-2', 'subsubopcion1-3-1', 'subsubopcion1-3-2', 'subseccion2a', 'subseccion2b', 'subseccion3a', 'subseccion3b', 'subseccion3c'].includes(sectionId) && !isLoggedIn) {
+        // Guardamos la última opción solicitada
+        localStorage.setItem('lastRequestedSection', sectionId);
+        
+        // Mostramos el formulario de login
         document.getElementById('login').style.display = 'flex';
         document.getElementById('errorMessage').textContent = '';
         objeto.style.display = 'none';
+        
+        // Manejador del evento de login
         document.getElementById('login').addEventListener('submit', async function(event) {
             event.preventDefault();
             const username = document.getElementById('username').value;
@@ -831,8 +837,14 @@ function showSection(sectionId) {
                 if (validUser) {
                     isLoggedIn = true;
                     document.getElementById('login').style.display = 'none';
-                    document.getElementById(sectionId).style.display = 'block';
-                    objeto.style.display = 'block';
+                    
+                    // Recuperamos la última sección solicitada y la mostramos
+                    const lastRequestedSection = localStorage.getItem('lastRequestedSection');
+                    if (lastRequestedSection) {
+                        document.getElementById(lastRequestedSection).style.display = 'block';
+                        objeto.style.display = 'block';
+                        localStorage.removeItem('lastRequestedSection'); // Limpiamos la opción guardada
+                    }
                 } else {
                     alert('Usuario o contraseña incorrectos');
                 }
@@ -842,6 +854,7 @@ function showSection(sectionId) {
             }
         });
     } else {
+        // Si el usuario ya está logueado, mostramos la opción directamente
         document.getElementById('login').style.display = 'none';
         document.getElementById(sectionId).style.display = 'block';
         objeto.style.display = 'block';
@@ -886,15 +899,14 @@ function ocultarMenu() {
 
 //***************CUENTA ELEMENTOS EN TABLAS DE UN RANGO DADO***************
 const ranges = [
-    { range: 'ATCO!K4:K', elementId: 'CompLing-count' },
-    { range: 'ATCO!A4:A1048576', elementId: 'NumAtco-count' },
-    { range: 'MP-VIGENTES!A4:A1048576', elementId: 'NumManProc-count' },
-    { range: 'R.INCIDENTES!A4:A1048576', elementId: 'NumIncid-count' },
-    { range: 'INS-ACTUAL!A4:A1048576', elementId: 'NumIncid-count' },
-    { range: 'INS-ACTUAL!A4:A1048576', elementId: 'NumInst-count' },
     { range: 'CAO-NAC-VIGENTES!A4:A1048576', elementId: 'CAONacVig-count' },
     { range: 'CAO-INT-VIGENTES!A4:A1048576', elementId: 'CAOInterVig-count' },
-    { range: 'CAO-MIL-VIGENTES!A4:A1048576', elementId: 'CAOMilVig-count' }
+    { range: 'CAO-MIL-VIGENTES!A4:A1048576', elementId: 'CAOMilVig-count' },
+    { range: 'MP-VIGENTES!A4:A1048576', elementId: 'NumManProc-count' },
+    { range: 'ATCO!A4:A1048576', elementId: 'NumAtco-count' },
+    { range: 'R.INCIDENTES!A4:A1048576', elementId: 'NumIncid-count' },
+    { range: 'INS-ACTUAL!A4:A1048576', elementId: 'NumInst-count' }
+    
 ];
 function CountElementsTable(range, elementId) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`;
