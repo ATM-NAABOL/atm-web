@@ -772,7 +772,7 @@ function fetchData(option) {
                     } 
                     else if (cell.includes('@')) {
                         //***************SI HAY ALGUNA @ LE PONDRA ICONO DE MAIL***************
-                        tableHTML += `<td><a class="icon-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=${cell}" target="_blank"><i class="fas fa-envelope"></i></a></td>`;
+                        tableHTML += `<td><a class="icon-link" href="mailto:${cell}" target="_blank"><i class="fas fa-envelope"></i></a></td>`;
                     } 
                     else if (/^[a-zA-Z0-9-_]{33}$/.test(cell)) {
                         //***************SI ES LA ID DE UNA URL(SOLO LA ID) LE PONDRA ICONO DE PERSONA, PUES DEBERA SER UNA FOTO***************
