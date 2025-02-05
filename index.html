@@ -2,386 +2,396 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">  
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>DOCUMENTOS ATM - NAABOL</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Corbel', sans-serif;
-        }
-        body {
-            margin: 0;
-            display: flex;
-            height: 100%;
-            color: #333;
-/*BUSCADOR*/
-        }
-        .search-container {
-            position: absolute;
-            width: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 110px;
-        }
-        #display-search-container {
-            display: none;
-        }
-        #buscador {
-            width: 100%;
-            padding: 10px 40px 10px 10px;
-            font-size: 16px;
-            border: 2px solid #ccc;
-            border-radius: 25px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-        #buscador:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
-        }
-        .search-container i {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #aaa;
-            font-size: 16px;
-            pointer-events: none;
-        }
-/*IMAGENES DEL MENU LATERAL*/
-        .sidebar img {
-            max-width: 90%;
-            height: auto;
-            margin-bottom: 20px;
-            padding: 2px;
-            margin-top: 30px;
-/*MENU LATERAL*/
-        }
-        .sidebar {
-
-            min-width: 200px;
-            width: 200px;
-            background-color: #171717;
-            color: #f4f4f4;
-            min-height:150vh;
-            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
-            transition: width 0.3s;
-            text-align: center; 
-/*FORMATOS DE TEXTO DEL MENU LATERAL*/
-        }
-        .sidebar h1 {
-            font-size: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            padding: 10px;
-            color: #3498db;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        .sidebar h2 {
-            text-align: center;
-            margin: 0 0 20px 0;
-            font-size: 18px;
-        }
-        .sidebar a {
-            text-decoration: none;
-            border-radius: 5px;
-            overflow: hidden;
-            padding: 15px 20px;
-            color: white;
-            text-align: left;
-            display: block;
-            transition: background-color 0.3s, padding-left 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
-        .sidebar a:hover {
-            background-color: rgba(64,64,64, 0.8);
-            padding-left: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transform: translateX(5px);
-
-        }
-        .sidebar a.active {
-            background-color: rgba(64,64,64, 0.8);
-            padding-left: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transform: translateX(5px);
-            color:#F44336 ;
-        }
-
-        .sidebar a:hover::before {
-            transform: scale(1.05);
-        }
-/*OPCIONES DEL MENU LATERAL*/
-        .sidebar .submenu{
-            padding: 15px;
-            cursor: pointer;
-            border-bottom: 1px solid #444;
-        }
-        .menu {
-            padding: 15px 20px;
-            color: white;
-            display: flex;
-            transition: background-color 0.3s, padding-left 0.3s, box-shadow 0.3s;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .submenu {
-            display: none;
-            padding-left: 10px;
-            font-size: 14px;
-        }
-        .submenu a.active {
-            padding: 10px 20px;
-            background-color: rgba(112, 112, 112, 0.9);
-            color: #FFA500 ;
-        }
-        .submenu a::before {
-            margin-right: 10px;
-        }
-        .subsubmenu {
-            display: none;
-            padding-left: 10px;
-            font-size: 12px; 
-        }
-        .subsubmenu a::before {
-            padding: 5px 10px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .subsubmenu a.active {
-            padding: 10px 20px;
-            background-color: rgba(153,153,153, 0.9);
-            transition: background-color 0.3s, transform 0.3s;
-            color: #333333;
-        }
-/*AREA DEL CONTENIDO*/
-        .content {
-            display: flex;
-            padding: 40px;
-            width: 100%;
-            height: auto;
-            margin: 10px;
-            transition: margin-left 0.3s;
-/*BOTON OCULTA O MUESTRA MENU LATERAL*/
-        }
-        #toggle-btn {
-            position: absolute;
-            left: 15px;
-            top: 8px;
-            cursor: pointer;
-            color: #3498db;
-        }
-/*FORMATOS DE TEXTO DEL CONTENIDO*/
-        .content h3 {
-            font-size: 34px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: #2c3e50; 
-        }
-        .content h2 {
-            font-size: 34px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: #2c3e50; 
-        }
-        .content h1 {
-            font-size: 16px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: #2c3e50; 
-            text-align: center;
-        }
-        .content p {
-            font-size: 28px;
-            line-height: 1.6;
-            color: #34495e;
-
-        }
-/*PIE DE PAGINA CON COPYRIGHT*/
-        .footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #171717;
-            color: #ffffff;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 30px;
-            border-top: 2px solid #3498db;
-            font-size: 10px;
-        }
-/*LOGIN (USUARIO Y CONTRASEÑA)*/
-        .section, .login {
-            display: none;
-            width: 100%;
-            margin: 0;
-        }
-        .login {
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            width: 300px;
-            position: absolute;
-            display: flex;
-            margin-top: 10%;
-            margin-left: 20%;
-        }
-        .login input {
-            margin-bottom: 10px;
-            padding: 10px;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin: 10px 0;
-        }
-        .login button {
-            padding: 10px;
-            background-color: #171717;
-            color: #f4f4f4;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            padding: 10px;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-        .login button:hover {
-            background-color: #ffcc00;
-        }
-        .error {
-            color: red;
-            text-align: center;
-        }
-/*OPCIONES PRINCIPALES DEL MENU LATERAL*/
-        .title1 {
-            padding-left: 10px;
-            font-size: 12px;
-            background-color: #171717;
-            color: #5A5A5A;
-            font-weight: bold;
-            text-align: center;
-        }
-/*PAGINAS IMPORTADAS POR URL*/
-        iframe {     
-            width: 80vw;
-            height: 80vh; 
-            position: relative; 
-            border: none;
-        }
-/*ESTILO DE TABLA*/
-        table {
-            width: 80vw;
-            height: 100%;
-            border-collapse: collapse;
-            margin-bottom: 40px;
-            margin-top: 50px;
-            background-color: #ffffff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        img {
-            max-width: 100px;
-        }
-        .icon-link {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-            color: #000;
-            text-decoration: none;
-            font-size: 48px;
-        }
-        .icon-link:hover {
-            color: #007bff;
-        }
-/*CUADROS DE PAGINA QUE SE MUESTRA AL CARGAR LA PAGINA*/
-        .card-container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .card {
-
-            background-color: #f7f9fb;
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            width: 250px;
-            padding: 25px;
-            text-align: center;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-        .card p {
-            font-size: 35px;
-            color: #34495E;
-            font-weight: bold;
-            text-align: center;
-        }
-/*ESTILO DE GRAFICAS*/
-        .graficasgroup{
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .graficacircular{
-            background-color: #f7f9fb;
-            border-radius: 20px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            width: auto;
-            height: auto;
-            padding: 25px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .graficas {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px; 
-        }
-        .chart-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%; 
-        }
-        .chart-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        canvas {
-           width: 100% !important; 
-           min-height: 400px !important;
-        }
-    </style>
 </head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Corbel', sans-serif;
+    }
+    body {
+        margin: 0;
+        display: flex;
+        height: 100%;
+        color: #333;
+/*BUSCADOR*/
+    }
+    .search-container {
+        position: absolute;
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 110px;
+    }
+    #display-search-container {
+        display: none;
+    }
+    #buscador {
+        width: 100%;
+        padding: 10px 40px 10px 10px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 25px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+    #buscador:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    }
+    .search-container i {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #aaa;
+        font-size: 16px;
+        pointer-events: none;
+    }
+/*IMAGENES DEL MENU LATERAL*/
+    .sidebar img {
+        max-width: 90%;
+        height: auto;
+        margin-bottom: 20px;
+        padding: 2px;
+        margin-top: 30px;
+    }
+/*MENU LATERAL*/
+    .sidebar {
+
+        min-width: 200px;
+        width: 200px;
+        background-color: #171717;
+        color: #f4f4f4;
+        min-height:150vh;
+        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
+        transition: width 0.3s;
+        text-align: center; 
+/*FORMATOS DE TEXTO DEL MENU LATERAL*/
+    }
+    .sidebar h1 {
+        font-size: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+        padding: 10px;
+        color: #3498db;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    .sidebar h2 {
+        text-align: center;
+        margin: 0 0 20px 0;
+        font-size: 18px;
+    }
+    .sidebar a {
+        text-decoration: none;
+        border-radius: 5px;
+        overflow: hidden;
+        padding: 15px 20px;
+        color: white;
+        text-align: left;
+        display: block;
+        transition: background-color 0.3s, padding-left 0.3s, box-shadow 0.3s;
+        position: relative;
+    }
+    .sidebar a:hover {
+        background-color: rgba(64,64,64, 0.8);
+        padding-left: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transform: translateX(5px);
+
+    }
+    .sidebar a.active {
+        background-color: rgba(64,64,64, 0.8);
+        padding-left: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transform: translateX(5px);
+        color:#F44336 ;
+    }
+
+    .sidebar a:hover::before {
+        transform: scale(1.05);
+    }
+/*OPCIONES DEL MENU LATERAL*/
+    .sidebar .submenu{
+        padding: 15px;
+        cursor: pointer;
+        border-bottom: 1px solid #444;
+    }
+    .menu {
+        padding: 15px 20px;
+        color: white;
+        display: flex;
+        transition: background-color 0.3s, padding-left 0.3s, box-shadow 0.3s;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    .submenu {
+        display: none;
+        padding-left: 10px;
+        font-size: 14px;
+    }
+    .submenu a.active {
+        padding: 10px 20px;
+        background-color: rgba(112, 112, 112, 0.9);
+        color: #FFA500 ;
+    }
+    .submenu a::before {
+        margin-right: 10px;
+    }
+    .subsubmenu {
+        display: none;
+        padding-left: 10px;
+        font-size: 12px; 
+    }
+    .subsubmenu a::before {
+        padding: 5px 10px;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    .subsubmenu a.active {
+        padding: 10px 20px;
+        background-color: rgba(153,153,153, 0.9);
+        transition: background-color 0.3s, transform 0.3s;
+        color: #333333;
+    }
+/*AREA DEL CONTENIDO*/
+    .content {
+        display: flex;
+        padding: 40px;
+        width: 100%;
+        height: auto;
+        margin: 10px;
+        transition: margin-left 0.3s;
+/*BOTON OCULTA O MUESTRA MENU LATERAL*/
+    }
+    #toggle-btn {
+        position: absolute;
+        left: 15px;
+        top: 8px;
+        cursor: pointer;
+        color: #3498db;
+    }
+/*FORMATOS DE TEXTO DEL CONTENIDO*/
+    .content h3 {
+        font-size: 34px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #2c3e50; 
+    }
+    .content h2 {
+        font-size: 34px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #2c3e50; 
+    }
+    .content h1 {
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #2c3e50; 
+        text-align: center;
+    }
+    .content p {
+        font-size: 28px;
+        line-height: 1.6;
+        color: #34495e;
+    }
+    .content p1 {
+        font-size: 18px;
+        line-height: 1.6;
+        color: black;
+    }
+    .content img {
+        min-width: 100%;
+        max-height: 100%;
+    }
+/*PIE DE PAGINA CON COPYRIGHT*/
+    .footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #171717;
+        color: #ffffff;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 30px;
+        border-top: 2px solid #3498db;
+        font-size: 10px;
+    }
+/*LOGIN (USUARIO Y CONTRASEÑA)*/
+    .section, .login {
+        display: none;
+        width: 100%;
+        margin: 0;
+    }
+    .login {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        width: 300px;
+        position: absolute;
+        display: flex;
+        margin-top: 10%;
+        margin-left: 20%;
+    }
+    .login input {
+        margin-bottom: 10px;
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin: 10px 0;
+    }
+    .login button {
+        padding: 10px;
+        background-color: #171717;
+        color: #f4f4f4;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        padding: 10px;
+        width: 100%;
+        transition: background-color 0.3s;
+    }
+    .login button:hover {
+        background-color: #ffcc00;
+    }
+    .error {
+        color: red;
+        text-align: center;
+    }
+/*OPCIONES PRINCIPALES DEL MENU LATERAL*/
+    .title1 {
+        padding-left: 10px;
+        font-size: 12px;
+        background-color: #171717;
+        color: #5A5A5A;
+        font-weight: bold;
+        text-align: center;
+    }
+/*PAGINAS IMPORTADAS POR URL*/
+    iframe {     
+        width: 100%;
+        height: 100%; 
+        position: relative; 
+        border: none;
+    }
+/*ESTILO DE TABLA*/
+    table {
+        width: 100%;
+        height: 100%;
+        border-collapse: collapse;
+        margin-bottom: 40px;
+        margin-top: 50px;
+        background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    img {
+        max-width: 100px;
+    }
+    .icon-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        color: #000;
+        text-decoration: none;
+        font-size: 48px;
+    }
+    .icon-link:hover {
+        color: #007bff;
+    }
+/*CUADROS DE PAGINA QUE SE MUESTRA AL CARGAR LA PAGINA*/
+    .card-container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .card {
+
+        background-color: #f7f9fb;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        width: 250px;
+        padding: 25px;
+        text-align: center;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease;
+    }
+    .card p {
+        font-size: 35px;
+        color: #34495E;
+        font-weight: bold;
+        text-align: center;
+    }
+/*ESTILO DE GRAFICAS*/
+    .graficasgroup{
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .graficacircular{
+        background-color: #f7f9fb;
+        border-radius: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        width: auto;
+        height: auto;
+        padding: 25px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .graficas {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px; 
+    }
+    .chart-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%; 
+    }
+    .chart-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    canvas {
+       width: 100% !important; 
+       min-height: 400px !important;
+    }
+
+</style>
+
 <body>
 <!--***************OCULTA O MUESTRA MENU LATERAL***************-->
 <div id="toggle-btn">☰ ATM</div>
@@ -392,71 +402,75 @@
     <!--***************OPCIONES DEL MENU LATERAL***************-->
     <div class="opcion">
         <div class="title1">CARTAS DE ACUERDO OPERACIONAL</div>
-        <a id="menu1" class="menu" href="#" onclick="toggleSubmenu('submenu1'); resetActiveMenu();setActive('menu1')"><i class="fas fa-handshake"></i> CAO</a>
-        <div id="submenu1" class="submenu">
-            <a href="#" id="subopcion1-1" onclick="resetActive(); toggleSubSubmenu('subsubmenu1-1'); setActive('subopcion1-1')"><i class="fas fa-chevron-down"></i> NACIONALES</a>
-            <div id="subsubmenu1-1" class="subsubmenu">
-                <a href="#" onclick="showSection('subsubopcion1-1-1'); setActive('subsubopcion1-1-1');setActive('subopcion1-1');fetchData('tablaA')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-                <a href="#" onclick="showSection('subsubopcion1-1-2'); setActive('subsubopcion1-1-2');setActive('subopcion1-1');fetchData('tablaB')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
+        <a id="menu1" class="menu" href="#" onclick="toggleSubmenu('menu1-1'); resetActiveMenu();setActive('menu1')"><i class="fas fa-handshake"></i> CAO</a>
+       
+            <div id="menu1-1" class="submenu">
+                <a href="#" id="opcion1-1" onclick="resetActive(); toggleSubSubmenu('menu1-1-1'); setActive('opcion1-1')"><i class="fas fa-chevron-down"></i> NACIONALES</a>
+                <div id="menu1-1-1" class="subsubmenu">
+                    <a href="#" onclick="showSection('opcion1-1-1');setActive('opcion1-1');fetchData('tablaA')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+                    <a href="#" onclick="showSection('opcion1-1-2');setActive('opcion1-1');fetchData('tablaB')"><i class="fas fa-caret-right"></i> Documentos Pasados</a></div>
+
+                <a href="#" id="opcion1-2" onclick="resetActive(); toggleSubSubmenu('menu1-1-2'); setActive('opcion1-2')"><i class="fas fa-chevron-down"></i>INTERNACIONALES</a>
+                <div id="menu1-1-2" class="subsubmenu">
+                    <a href="#" onclick="showSection('opcion1-2-1'); setActive('opcion1-2');fetchData('tablaC')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+                    <a href="#" onclick="showSection('opcion1-2-2'); setActive('opcion1-2');fetchData('tablaD')"><i class="fas fa-caret-right"></i> Documentos Pasados</a></div>
+
+                <a href="#" id="opcion1-3" onclick="resetActive(); toggleSubSubmenu('menu1-1-3'); setActive('opcion1-3')"><i class="fas fa-chevron-down"></i> ORGANISMOS MILITARES</a>
+                <div id="menu1-1-3" class="subsubmenu">
+                    <a href="#" onclick="showSection('opcion1-3-1'); setActive('opcion1-3');fetchData('tablaE')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+                    <a href="#" onclick="showSection('opcion1-3-2'); setActive('opcion1-3');fetchData('tablaF')"><i class="fas fa-caret-right"></i> Documentos Pasados</a></div>
+
             </div>
-            <a href="#" id="subopcion1-2" onclick="resetActive(); toggleSubSubmenu('subsubmenu1-2'); setActive('subopcion1-2')"><i class="fas fa-chevron-down"></i>INTERNACIONALES</a>
-            <div id="subsubmenu1-2" class="subsubmenu">
-                <a href="#" onclick="showSection('subsubopcion1-2-1'); setActive('subsubopcion1-2-1'); setActive('subopcion1-2');fetchData('tablaC')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-                <a href="#" onclick="showSection('subsubopcion1-2-2'); setActive('subsubopcion1-2-2'); setActive('subopcion1-2');fetchData('tablaD')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
-            </div>
-            <a href="#" id="subopcion1-3" onclick="resetActive(); toggleSubSubmenu('subsubmenu1-3'); setActive('subopcion1-3')"><i class="fas fa-chevron-down"></i> ORGANISMOS MILITARES</a>
-            <div id="subsubmenu1-3" class="subsubmenu">
-                <a href="#" onclick="showSection('subsubopcion1-3-1'); setActive('subsubopcion1-3-1'); setActive('subopcion1-3');fetchData('tablaE')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-                <a href="#" onclick="showSection('subsubopcion1-3-2'); setActive('subsubopcion1-3-2'); setActive('subopcion1-3');fetchData('tablaF')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
-            </div>
-        </div>
     </div>
+
     <div class="opcion">
         <div class="title1">MANUALES Y PROCEDIMIENTOS</div>
-        <a class="menu" href="#" onclick="toggleSubmenu('submenu2'); resetActiveMenu();setActive('menu2')"><i class="fas fa-book"></i>  MP</a>
-        <div id="submenu2" class="submenu">
-            <a href="#" onclick="showSection('subseccion2a'); setActive('submenu2a'); fetchData('tablaG')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-            <a href="#" onclick="showSection('subseccion2b'); setActive('submenu2b'); fetchData('tablaH')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
+        <a id="menu2" class="menu" href="#" onclick="toggleSubmenu('menu2-1'); resetActiveMenu();setActive('menu2')"><i class="fas fa-book"></i>  MP</a>
+        <div id="menu2-1" class="submenu">
+            <a href="#" onclick="showSection('opcion2-1'); fetchData('tablaG')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+            <a href="#" onclick="showSection('opcion2-2'); fetchData('tablaH')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
         </div>
     </div>
     <div class="opcion">
         <div class="title1">CONTROLADORES DE TRANSITO AEREO</div>
-        <a class="menu" href="#" onclick="toggleSubmenu('submenu3'); resetActiveMenu(); setActive('menu3')"><i class="fas fa-users"></i>  ATCO's</a>
-        <div id="submenu3" class="submenu">
-            <a href="#" onclick="showSection('subseccion3a'); setActive('submenu3a'); fetchData('tablaI')"><i class="fas fa-caret-right"></i> Listado del Personal</a>
-            <a href="#" onclick="showSection('subseccion3b'); setActive('submenu3b'); fetchData('tablaJ')"><i class="fas fa-caret-right"></i> Rol de Turnos</a>
-            <a href="#" onclick="showSection('subseccion3c'); setActive('submenu3c'); HideSearch()"><i class="fas fa-caret-right"></i> Graficos estadisticos</a>
+        <a id="menu3" class="menu" href="#" onclick="toggleSubmenu('menu3-1'); resetActiveMenu();setActive('menu3')"><i class="fas fa-users"></i>  ATCO's</a>
+        <div id="menu3-1" class="submenu">
+            <a href="#" onclick="showSection('opcion3-1'); fetchData('tablaI')"><i class="fas fa-caret-right"></i> Listado del Personal</a>
+            <a href="#" onclick="showSection('opcion3-2'); fetchData('tablaJ')"><i class="fas fa-caret-right"></i> Rol de Turnos</a>
+            <a href="#" onclick="showSection('opcion3-3'); HideSearch()"><i class="fas fa-caret-right"></i> Graficos estadisticos</a>
         </div>
     </div>
-    <!--
-        <div class="title1">REPORTE DE INCIDENTES</div>
-        <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion4a'); resetActiveMenu(); resetActive();setActive('submenu4a'); fetchData('tablaK')"><i class="fas fa-exclamation-triangle"></i>  INCIDENTES</a>
-    -->
     <div class="opcion">
         <div class="title1">INSTRUCTIVOS AL PERSONAL</div>
-        <a class="menu" href="#" onclick="toggleSubmenu('submenu5'); resetActiveMenu();resetActive();setActive('menu5')"><i class="fas fa-file-alt"></i>  INSTRUCTIVOS</a>
-        <div id="submenu5" class="submenu">
-            <a href="#" onclick="showSection('subseccion5a'); setActive('submenu5a'); fetchData('tablaM')"><i class="fas fa-caret-right"></i> Instructivos en la gestión</a>
-            <a href="#" onclick="showSection('subseccion5b'); setActive('submenu5b'); fetchData('tablaN')"><i class="fas fa-caret-right"></i> Historial de instructivos</a>
+        <a id="menu4" class="menu" href="#" onclick="toggleSubmenu('menu4-1'); resetActiveMenu();resetActive();setActive('menu4')"><i class="fas fa-file-alt"></i>  INSTRUCTIVOS</a>
+        <div id="menu4-1" class="submenu">
+            <a href="#" onclick="showSection('opcion4-1'); fetchData('tablaK')"><i class="fas fa-caret-right"></i> Instructivos en la gestión</a>
+            <a href="#" onclick="showSection('opcion4-2'); fetchData('tablaL')"><i class="fas fa-caret-right"></i> Historial de instructivos</a>
         </div>
     </div>
     <div class="opcion">
         <div class="title1">INDICADORES CLAVE DE RENDIMIENTO</div>
-        <a class="menu" href="#" onclick="toggleSubmenu('submenu6'); resetActiveMenu();setActive('menu6')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
-        <div id="submenu6" class="submenu">
-
-            <a href="#" onclick="showSection('subseccion6b'); setActive('submenu6b'); HideSearch()"><i class="fas fa-caret-right"></i> KPI's BOLIVIA</a>
-            <a href="#" onclick="showSection('subseccion6c'); setActive('submenu6c'); fetchData('tablaO')"><i class="fas fa-caret-right"></i> DOCUMENTOS KPI's</a>
+        <a id="menu5" class="menu" href="#" onclick="toggleSubmenu('menu5-1'); resetActiveMenu();setActive('menu5')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
+        <div id="menu5-1" class="submenu">
+            <a href="#" onclick="showSection('opcion5-1'); HideSearch()"><i class="fas fa-caret-right"></i> KPI's BOLIVIA</a>
+            <a href="#" onclick="showSection('opcion5-2'); fetchData('tablaM')"><i class="fas fa-caret-right"></i> DOCUMENTOS KPI's</a>
         </div>
     </div>
+
     <div class="opcion">
         <div class="title1">MEDIDAS ATFM</div>
-        <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion7a'); resetActiveMenu(); resetActive(); setActive('submenu7a'); HideSearch()"><i class="fas fa-bullseye"></i>  ATFM</a>
+        <a id="menu6" class="menu" href="#" onclick="ocultarMenu();showSection('opcion6'); resetActiveMenu(); resetActive(); setActive('opcion6'); HideSearch()"><i class="fas fa-bullseye"></i>  ATFM</a>
     </div>
     <div class="opcion">
          <div class="title1">DOCUMENTOS NO PERTENECIENTES A ATM</div>
-        <a class="menu" href="#" onclick="ocultarMenu();showSection('subseccion8a'); resetActiveMenu(); resetActive(); setActive('submenu8a'); fetchData('tablaR')"><i class="fas fa-folder-open"></i>  DOCUMENTOS</a>
+        <a id="menu7" class="menu" href="#" onclick="ocultarMenu();showSection('opcion7'); resetActiveMenu(); resetActive(); setActive('opcion7'); fetchData('tablaN')"><i class="fas fa-folder-open"></i>  DOCUMENTOS</a>
     </div>
+<!--
+    <div class="opcion">
+        <div class="title1">EJEMPLO</div>
+        <a id="menu8" class="menu" href="#" onclick="ocultarMenu();showSection('opcion9'); resetActiveMenu(); resetActive(); setActive('opcion9'); HideSearch()"><i class="fas fa-plane"></i>  EJ</a>
+    </div>
+-->
 </div>
 <!--***************AREA DEL CONTENIDO*************** -->
 <div class="content">
@@ -490,13 +504,6 @@
                 <h1>NUMERO DE CONTROLADORES AEREOS</h1>
                 <p id="NumAtco-count">Cargando...</p>
             </div>
-            <!--
-            <div class="card">
-                <i class="fas fa-exclamation-triangle" style="font-size: 50px"></i>
-                <h1>NUMERO DE REPORTE DE INCIDENTES</h1>
-                <p id="NumIncid-count">Cargando...</p>
-            </div>
-            -->
             <div class="card">
                 <i class="fas fa-file-alt" style="font-size: 50px"></i>
                 <h1>NUMERO DE INSTRUCTIVAS</h1>
@@ -521,57 +528,57 @@
         <i class="fas fa-search"></i>
     </div>
     <!--***************CONTENIDO DE LAS OPCIONES***************-->
-    <div id="subsubopcion1-1-1" class="section">
+    <div id="opcion1-1-1" class="section">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>NACIONALES - DOCUMENTOS VIGENTES</p>
         <div id="dataA" class="tabla"></div>
     </div>
-    <div id="subsubopcion1-1-2" class="section">
+    <div id="opcion1-1-2" class="section">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>NACIONALES - DOCUMENTOS PASADOS</p>
         <div id="dataB" class="tabla"></div>
     </div>
-    <div id="subsubopcion1-2-1" class="section">
+    <div id="opcion1-2-1" class="section">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>INTERNACIONALES - DOCUMENTOS VIGENTES</p>
         <div id="dataC" class="tabla"></div>
     </div>
-        <div id="subsubopcion1-2-2" class="section">
+        <div id="opcion1-2-2" class="section">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>INTERNACIONALES - DOCUMENTOS PASADOS</p>
         <div id="dataD" class="tabla"></div>
     </div>
-    <div id="subsubopcion1-3-1" class="section">
+    <div id="opcion1-3-1" class="section">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>ORGANISMOS MILITARES - DOCUMENTOS VIGENTES</p>
         <div id="dataE" class="tabla"></div>
     </div>
-        <div id="subsubopcion1-3-2" class="section">
+        <div id="opcion1-3-2" class="section">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>ORGANISMOS MILITARES - DOCUMENTOS PASADOS</p>
         <div id="dataF" class="tabla"></div>
     </div>
-    <div id="subseccion2a" class="section">
-        <h3>MANUALES Y PROCEDIMIENTOS</h3>
+    <div id="opcion2-1" class="section">
+        <h3>MANUALiES Y PROCEDIMIENTOS</h3>
         <p>DOCUMENTOS VIGENTES</p>
         <div id="dataG" class="tabla"></div>
     </div>
-    <div id="subseccion2b" class="section">
+    <div id="opcion2-2" class="section">
         <h3>MANUALES Y PROCEDIMIENTOS</h3>
         <p>DOCUMENTOS PASADOS</p>
         <div id="dataH" class="tabla"></div>
     </div>
-    <div id="subseccion3a" class="section">
+    <div id="opcion3-1" class="section">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
         <p>LISTADO DEL PERSONAL</p>
         <div id="dataI" class="tabla"></div>
     </div>
-    <div id="subseccion3b" class="section">
+    <div id="opcion3-2" class="section">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
         <p>ROL DE TURNOS</p>
         <div id="dataJ" class="tabla"></div>
     </div>
-    <div id="subseccion3c" class="section">
+    <div id="opcion3-3" class="section">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
         <p>GRAFICOS ESTADISTICOS</p>
         <div class="graficasgroup">
@@ -613,47 +620,55 @@
             </div>
         </div>
     </div>
-    <div id="subseccion4a" class="section">
-        <h3>REPORTE DE INCIDENTES</h3>
-        <p>REPORTES REGISTRADOS EN LA GESTION</p>
-        <div id="dataK" class="tabla"></div>
-    </div>
-    <div id="subseccion5a" class="section">
+
+    <div id="opcion4-1" class="section">
         <h3>INSTRUCCTIVOS AL PERSONAL</h3>
         <p>INSTRUCTIVOS VIGENTES</p>
-        <div id="dataM" class="tabla"></div>
+        <div id="dataK" class="tabla"></div>
     </div>
-    <div id="subseccion5b" class="section">
+    <div id="opcion4-2" class="section">
         <h3>INSTRUCCTIVOS AL PERSONAL</h3>
         <p>INSTRUCTIVAS ARCHIVADAS</p>
-        <div id="dataN" class="tabla"></div>
+        <div id="dataL" class="tabla"></div>
     </div>
-    <div id="subseccion6b" class="section">
+    <div id="opcion5-1" class="section">
         <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
         <p>KPI's BOLIVIA</p>
             <iframe src="https://www.canva.com/design/DAGDSVbIs9Y/R6LVGZuKXxkDOcD2T06AlQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
     </div>
-    <div id="subseccion6c" class="section">
+    <div id="opcion5-2" class="section">
         <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
         <p>DOCUMENTO KPI's</p>
-        <div id="dataO" class="tabla"></div>
+        <div id="dataM" class="tabla"></div>
     </div>
-    <div id="subseccion7a" class="section">
+    <div id="opcion6" class="section">
         <h3>MEDIDAS ATFM SAM</h3>
         <p>PLAN DE OPERACIONES ATFM PARA LA REGION SAM</p>
         <iframe src="https://app.powerbi.com/view?r=eyJrIjoiOTc4YTZhMTQtZmE0YS00ZDUzLWI3NzgtNjIxYWZlYjU2OGI2IiwidCI6IjI2MjI4ZGNhLTcwZDMtNDkxNy04MjMzLTA4M2FjMzY1NWE5MSJ9" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
     </div>
-
-    <div id="subseccion7b" class="section">
-        <h3>MEDIDAS ATFM DE LA FIR LA PAZ</h3>
-        <p>OPCION2</p>
-        <div id="dataQ" class="tabla"></div>
-    </div>
-    <div id="subseccion8a" class="section">
+    <div id="opcion7" class="section">
         <h3>DOCUMENTOS NO OPERATIVOS</h3>
         <p>DOCUMENTACION VIGENTE</p>
-        <div id="dataR" class="tabla"></div>
+        <div id="dataN" class="tabla"></div>
     </div>
+    <div id="opcion8" class="section">
+        <h3>OBJETIVOS ATM-ACC</h3>
+        <p>Objetivos de control de transito aereo</p>
+        <p1>NAABOL brinda servicios de accesibilidad al transporte aéreo nacional e internacional, con atención de calidad a través de un equipamiento e infraestructura aeronáutica moderna que cuenta con tecnología de punta para la navegación aérea. Contribuyendo a la integración de los Pueblos, en armonía con el medio ambiente y la Madre Tierra; bajo el marco de las normas aeronáuticas y los planes de gobierno.</p1>
+        
+        <iframe src="https://naabol.gob.bo/"></iframe>
+        <div id="dataO" class="tabla"></div>
+        <img src="avion.jpg">
+    </div>
+    <div id="opcion9" class="section">
+        <h3>EJEMPLO</h3>
+        <p>AÑADIR NUEVA SECCION A PAGINA WEB</p>
+        <p1>La Aviación: Un Mundo de Innovación y Conexión Global
+            <br>La aviación es una de las industrias más fascinantes y cruciales en la era moderna. Desde sus inicios a principios del siglo XX hasta el día de hoy, ha transformado la manera en que las personas se mueven y las mercancías se transportan alrededor del mundo. Lo que comenzó con los experimentos de los hermanos Wright en 1903, quienes lograron el primer vuelo controlado y sostenido con una aeronave más pesada que el aire, ha evolucionado hasta convertirse en un sistema global de transporte que conecta continentes, facilita el comercio internacional y permite el desplazamiento rápido de personas, productos e ideas.
+            <br>Orígenes de la Aviación
+            <br>La historia de la aviación está marcada por esfuerzos pioneros, innovaciones tecnológicas y grandes avances científicos. Aunque la idea de volar es tan antigua como la humanidad misma, los primeros avances significativos se dieron en la década de 1890, cuando los pioneros como Otto Lilienthal y Samuel Langley realizaron vuelos exitosos con planeadores. Sin embargo, fue el 17 de diciembre de 1903 cuando los hermanos Wright lograron un hito histórico con el vuelo del Flyer, una aeronave con motor que voló por 12 segundos a una distancia de 36 metros.
+            <br>Este éxito marcó el comienzo de una era de exploración de los cielos. Durante la Primera Guerra Mundial, la aviación desempeñó un papel fundamental en el desarrollo de las aeronaves de combate, lo que impulsó la investigación en aerodinámica, motores más potentes y técnicas de vuelo más avanzadas. Al finalizar la guerra, muchas de las innovaciones militares encontraron aplicación en el ámbito civil, lo que permitió el comienzo de la aviación comercial.</p1>
+    </div> 
 </div>
 <!--***************PIE DE PAGINA CON COPYRIGHT***************-->
 <div class="footer">
@@ -742,15 +757,22 @@ function fetchData(option) {
         tablaH: 'MP-PASADOS!A3:L',
         tablaI: 'ATCO!A3:Q',
         tablaJ: 'RT!A3:J',
-        tablaK: '',
-        tablaL: '',
-        tablaM: 'INS-ACTUAL!A3:G',
-        tablaN: 'INST-HISTORIAL!A3:H',
-        tablaO: 'KPI!A3:E',
+        tablaK: 'INS-ACTUAL!A3:G',
+        tablaL: 'INST-HISTORIAL!A3:H',
+        tablaM: 'KPI!A3:E',
+        tablaN: 'DOC-NO-ATM!A3:E',
+        tablaO: 'DOC-NO-ATM!A3:E',
         tablaP: '',
         tablaQ: '',
-        tablaR: 'DOC-NO-ATM!A3:E', 
+        tablaR: '', 
         tablaS: '',
+        tablaT: '',
+        tablaU: '',
+        tablaV: '',
+        tablaW: '',
+        tablaX: '',
+        tablaY: '',
+        tablaZ: '',
     };
     const sheetName = sheetNames[option];
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${sheetName}?key=${API_KEY}`;
@@ -801,7 +823,7 @@ function showSection(sectionId) {
         section.style.display = 'none';
     });
     //***************OPCIONES A LAS QUE SE REQUIERE LOGIN PARA ACCEDER***************
-    if (['subsubopcion1-1-1', 'subsubopcion1-1-2', 'subsubopcion1-2-1', 'subsubopcion1-2-2', 'subsubopcion1-3-1', 'subsubopcion1-3-2', 'subseccion2a', 'subseccion2b', 'subseccion3a', 'subseccion3b', 'subseccion3c'].includes(sectionId) && !isLoggedIn) {
+    if (['opcion3-1', 'opcion3-2'].includes(sectionId) && !isLoggedIn) {
         // Guardamos la última opción solicitada
         localStorage.setItem('lastRequestedSection', sectionId);
         
@@ -904,7 +926,6 @@ const ranges = [
     { range: 'CAO-MIL-VIGENTES!A4:A1048576', elementId: 'CAOMilVig-count' },
     { range: 'MP-VIGENTES!A4:A1048576', elementId: 'NumManProc-count' },
     { range: 'ATCO!A4:A1048576', elementId: 'NumAtco-count' },
-    { range: 'R.INCIDENTES!A4:A1048576', elementId: 'NumIncid-count' },
     { range: 'INS-ACTUAL!A4:A1048576', elementId: 'NumInst-count' }
     
 ];
@@ -997,13 +1018,13 @@ const hoverColors4 = ['#005D8E'];
 const hoverColors5 = ['#4C9A2A'];
 const hoverColors6 = ['#FFB81C'];
 const hoverColors7 = ['#D32F2F'];
-crearGraficaCircular('GRAFICOS.ATCO!A11:B13', 'myPieChart1', hoverColors1);//ACC SLLP SLCB SLVR
-crearGraficaCircular('GRAFICOS.ATCO!D10:E13', 'myPieChart2', hoverColors2);//ATO SECUNDARIOS
-crearGraficaCircular('GRAFICOS.ATCO!G10:H13', 'myPieChart3', hoverColors3);//DATOS GENERALES
-crearGraficaCircular('GRAFICOS.ATCO!J19:K22', 'myPieChart4', hoverColors4);//REGIONAL LA PAZ
-crearGraficaCircular('GRAFICOS.ATCO!J25:K28', 'myPieChart5', hoverColors5);//REGIONAL COCHABAMBA
-crearGraficaCircular('GRAFICOS.ATCO!J31:K34', 'myPieChart6', hoverColors6);//REGIONAL BENI
-crearGraficaCircular('GRAFICOS.ATCO!J37:K40', 'myPieChart7', hoverColors7);//REGIONAL SANTA CRUZ
+crearGraficaCircular('GRAFICOS.ATCO!G6:H9', 'myPieChart1', hoverColors1);//ACC SLLP SLCB SLVR
+crearGraficaCircular('GRAFICOS.ATCO!J6:K9', 'myPieChart2', hoverColors2);//ATO SECUNDARIOS
+crearGraficaCircular('GRAFICOS.ATCO!M6:N9', 'myPieChart3', hoverColors3);//DATOS GENERALES
+crearGraficaCircular('GRAFICOS.ATCO!L18:M21', 'myPieChart4', hoverColors4);//REGIONAL LA PAZ
+crearGraficaCircular('GRAFICOS.ATCO!L24:M27', 'myPieChart5', hoverColors5);//REGIONAL COCHABAMBA
+crearGraficaCircular('GRAFICOS.ATCO!L30:M33', 'myPieChart6', hoverColors6);//REGIONAL BENI
+crearGraficaCircular('GRAFICOS.ATCO!L36:M39', 'myPieChart7', hoverColors7);//REGIONAL SANTA CRUZ
 
 //***************GRAFICOS DE BARRA NIVEL DE COMPETENCIA LINGUISTICA POR REGIONALES - AEROPUERTO***************
 const backgroundColorsGrafica = [
@@ -1103,10 +1124,10 @@ function createChartGrafica(labelsGrafica, datasetsGrafica, chartContainerIdGraf
 }
 function loadGraphsGrafica() {
     const rangesGrafica = [
-        { rangeGrafica: 'GRAFICOS.ATCO!A18:I22', containerIdGrafica: 'chart1', typeGrafica: 'bar', titleGrafica: 'REGIONAL LA PAZ' },
-        { rangeGrafica: 'GRAFICOS.ATCO!A24:G28', containerIdGrafica: 'chart2', typeGrafica: 'bar', titleGrafica: 'REGIONAL COCHABAMBA' },
-        { rangeGrafica: 'GRAFICOS.ATCO!A30:F34', containerIdGrafica: 'chart3', typeGrafica: 'bar', titleGrafica: 'REGIONAL BENI' },
-        { rangeGrafica: 'GRAFICOS.ATCO!A36:F40', containerIdGrafica: 'chart4', typeGrafica: 'bar', titleGrafica: 'REGIONAL SANTA CRUZ' },
+        { rangeGrafica: 'GRAFICOS.ATCO!A17:K21', containerIdGrafica: 'chart1', typeGrafica: 'bar', titleGrafica: 'REGIONAL LA PAZ' },
+        { rangeGrafica: 'GRAFICOS.ATCO!A23:K27', containerIdGrafica: 'chart2', typeGrafica: 'bar', titleGrafica: 'REGIONAL COCHABAMBA' },
+        { rangeGrafica: 'GRAFICOS.ATCO!A29:K33', containerIdGrafica: 'chart3', typeGrafica: 'bar', titleGrafica: 'REGIONAL BENI' },
+        { rangeGrafica: 'GRAFICOS.ATCO!A35:K39', containerIdGrafica: 'chart4', typeGrafica: 'bar', titleGrafica: 'REGIONAL SANTA CRUZ' },
     ];
     rangesGrafica.forEach((rangeGrafica) => {
         const titleElementGrafica = document.createElement('h3');
