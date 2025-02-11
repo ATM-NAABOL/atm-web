@@ -295,12 +295,13 @@
 /*ESTILO DE TABLA*/
     table {
         width: 100%;
-        height: 100%;
+        height: auto;
         border-collapse: collapse;
-        margin-bottom: 40px;
-        margin-top: 50px;
+        margin-bottom: 60px;
+        margin-top: 80px;
         background-color: #ffffff;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+
     }
     th, td {
         border: 1px solid #ccc;
@@ -313,7 +314,20 @@
     img {
         max-width: 100px;
     }
+    th, td {
+        padding: 10px;
+        border: 1px solid #dddddd;
+        text-align: center;
+    }
+    th {
+        background-color: #eeeeee;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
     .icon-link {
+        transition: color 0.3s ease;
+
         display: flex;
         justify-content: center;
         align-items: center;
@@ -326,6 +340,67 @@
     .icon-link:hover {
         color: #007bff;
     }
+
+        
+    /* ESTILO DEL BUSCADOR DE LISTA DE CONTROLADORES DE TRANSITO AEREO */
+    .search-containerATMLIST {
+        position: absolute;
+        width: 80%;
+        max-width: 400px;
+        margin: 0 auto 20px;
+
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .search-inputATMLIST {
+        width: 100%;
+        padding: 12px 40px 12px 20px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 25px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        outline: none;
+        transition: all 0.3s ease-in-out;
+    }
+    .search-inputATMLIST:focus {
+        border-color: #007bff;
+        box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.4);
+    }
+    .search-containerATMLIST i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: #888;
+    }
+    /* BOTON PARA FORMULARIO DE REGISTRO O EDICION DE DATOS DE LISTADO DE CONTROLADORES */
+    .floating-button {
+      position: fixed;
+      bottom: 40px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #171717;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .floating-button:hover {
+      background-color: #333;
+    }
+
+
 /*CUADROS DE PAGINA QUE SE MUESTRA AL CARGAR LA PAGINA*/
     .card-container {
         display: flex;
@@ -435,7 +510,7 @@
         <div class="title1">CONTROLADORES DE TRANSITO AEREO</div>
         <a id="menu3" class="menu" href="#" onclick="toggleSubmenu('menu3-1'); resetActiveMenu();setActive('menu3')"><i class="fas fa-users"></i>  ATCO's</a>
         <div id="menu3-1" class="submenu">
-            <a href="#" onclick="showSection('opcion3-1'); fetchData('tablaI')"><i class="fas fa-caret-right"></i> Listado del Personal</a>
+            <a href="#" onclick="showSection('opcion3-1'); HideSearch(); fetchDataATMLIST(); HideSearch()"><i class="fas fa-caret-right"></i> Listado del Personal</a>
             <a href="#" onclick="showSection('opcion3-2'); fetchData('tablaJ')"><i class="fas fa-caret-right"></i> Rol de Turnos</a>
             <a href="#" onclick="showSection('opcion3-3'); HideSearch()"><i class="fas fa-caret-right"></i> Graficos estadisticos</a>
         </div>
@@ -571,12 +646,24 @@
     <div id="opcion3-1" class="section">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
         <p>LISTADO DEL PERSONAL</p>
-        <div id="dataI" class="tabla"></div>
+        <div class="search-containerATMLIST">
+            <input type="text" id="searchInputATMLIST" class="search-inputATMLIST" placeholder="Buscar..." onkeyup="filterTableATMLIST()">
+            <i class="fas fa-search"></i>
+        </div>
+
+        <table id="dataTableATMLIST">
+            <thead>
+                <tr id="headerRowATMLIST"></tr>
+            </thead>
+            <tbody id="tableBodyATMLIST"></tbody>
+        </table>
+        <a href="https://naabol.noloco.co/atco" class="floating-button">+</a>
     </div>
     <div id="opcion3-2" class="section">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
         <p>ROL DE TURNOS</p>
         <div id="dataJ" class="tabla"></div>
+
     </div>
     <div id="opcion3-3" class="section">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
@@ -1156,6 +1243,103 @@ const observer = new IntersectionObserver(entries => {
 });
 const sectionGrafica = document.getElementById('graficas');
 observer.observe(sectionGrafica);
+    
+
+
+        const sheetId = "1v2Xlmx5YdJ4jjUI9TEGAzHpZR0dLcjmwAj41PPq2CK4";
+        const apiKey = "AIzaSyBJuRk7BogPQDlwwPdmi9_wru1Y75xspZw";
+        const ATMLISTranges = ["Sheet1!B:M","Sheet1!O:Q", "Sheet1!S:X"];
         
+        async function fetchDataATMLIST() {
+            try {
+                const responses = await Promise.all(
+                    ATMLISTranges.map(range => 
+                        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`)
+                            .then(response => response.json())
+                    )
+                );
+                
+                const mergedData = mergeDataATMLIST(responses[0].values, responses[1].values, responses[2].values);
+                populateTableATMLIST(mergedData);
+            } catch (error) {
+                console.error("Error al obtener los datos: ", error);
+            }
+        }
+        
+        function mergeDataATMLIST(range1, range2, range3) {
+            const maxLength = Math.max(range1.length, range2.length, range3.length);
+            let merged = [];
+            
+            for (let i = 0; i < maxLength; i++) {
+                const row1 = range1[i] || [];
+                const row2 = range2[i] || [];
+                const row3 = range3[i] || [];
+                merged.push([...row1, ...row2, ...row3]);
+            }
+            return merged;
+        }
+        
+        function populateTableATMLIST(data) {
+            const headerRow = document.getElementById("headerRowATMLIST");
+            const tableBody = document.getElementById("tableBodyATMLIST");
+            
+            headerRow.innerHTML = "";
+            tableBody.innerHTML = "";
+            
+            if (data.length > 0) {
+                data[0].forEach(header => {
+                    let th = document.createElement("th");
+                    th.textContent = header;
+                    headerRow.appendChild(th);
+                });
+                
+                data.slice(1).forEach(row => {
+                    let tr = document.createElement("tr");
+                    row.forEach(cell => {
+                        let td = document.createElement("td");
+                        if (/^(https?:\/\/\S+)$/i.test(cell)) {
+                            let a = document.createElement("a");
+                            a.href = cell;
+                            a.target = "_blank";
+                            let icon = document.createElement("i");
+                            icon.className = "fas fa-file-alt icon-link";
+                            a.appendChild(icon);
+                            td.appendChild(a);
+
+                        } else if (/^[a-zA-Z0-9-_]{33}$/.test(cell)) {
+                            let a = document.createElement("a");
+                            a.href = `https://drive.google.com/file/d/${cell}/view?usp=drive_link`;
+                            a.target = "_blank";
+                            let icon = document.createElement("i");
+                            icon.className = "fas fa-user icon-link";
+                            a.appendChild(icon);
+                            td.appendChild(a);
+
+                        } else if (cell.includes('@')) {
+                            let a = document.createElement("a");
+                            a.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${cell}`;
+                            a.target = "_blank";
+                            let icon = document.createElement("i");
+                            icon.className = "fas fa-envelope icon-link";
+                            a.appendChild(icon);
+                            td.appendChild(a);
+                        } else {
+                            td.textContent = cell;
+                        }
+                        tr.appendChild(td);
+                    });
+                    tableBody.appendChild(tr);
+                });
+            }
+        }
+        function filterTableATMLIST() {
+            let input = document.getElementById("searchInputATMLIST").value.toLowerCase();
+            let rows = document.querySelectorAll("#tableBodyATMLIST tr");
+
+            rows.forEach(row => {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(input) ? "" : "none";
+            });
+        }       
 </script>
 </html>
