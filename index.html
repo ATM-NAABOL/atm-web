@@ -397,7 +397,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
     .floating-button:hover {
-      background-color: #333;
+      background-color: #007bff;
     }
 
 
@@ -511,7 +511,7 @@
         <a id="menu3" class="menu" href="#" onclick="toggleSubmenu('menu3-1'); resetActiveMenu();setActive('menu3')"><i class="fas fa-users"></i>  ATCO's</a>
         <div id="menu3-1" class="submenu">
             <a href="#" onclick="showSection('opcion3-1'); HideSearch(); fetchDataATMLIST(); HideSearch()"><i class="fas fa-caret-right"></i> Listado del Personal</a>
-            <a href="#" onclick="showSection('opcion3-2'); fetchData('tablaJ')"><i class="fas fa-caret-right"></i> Rol de Turnos</a>
+            <a href="#" onclick="showSection('opcion3-2');fetchDataDOCUMENTSAtco('tabla1')"><i class="fas fa-caret-right"></i> Rol de Turnos</a>
             <a href="#" onclick="showSection('opcion3-3'); HideSearch()"><i class="fas fa-caret-right"></i> Graficos estadisticos</a>
         </div>
     </div>
@@ -662,8 +662,7 @@
     <div id="opcion3-2" class="section">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
         <p>ROL DE TURNOS</p>
-        <div id="dataJ" class="tabla"></div>
-
+        <div id="data1" class="tabla"></div>
     </div>
     <div id="opcion3-3" class="section">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
@@ -737,6 +736,8 @@
         <h3>DOCUMENTOS NO OPERATIVOS</h3>
         <p>DOCUMENTACION VIGENTE</p>
         <div id="dataN" class="tabla"></div>
+        <iframe src="https://docs.google.com/document/d/e/2PACX-1vQW3i_c7_PVCieUbkir0CgIUy90nzs1-AcdAHO5EmqSimCPOjZ91WUCIbfoyzJOxg/pub" width="100%" height="auto"></iframe>
+
     </div>
     <div id="opcion8" class="section">
         <h3>OBJETIVOS ATM-ACC</h3>
@@ -843,8 +844,8 @@ function fetchData(option) {
         tablaF: 'CAO-MIL-PASADOS!A3:L',
         tablaG: 'MP-VIGENTES!A3:L',
         tablaH: 'MP-PASADOS!A3:L',
-        tablaI: 'ATCO!A3:Q',
-        tablaJ: 'RT!A3:J',
+        tablaI: '',
+        tablaJ: '',
         tablaK: 'INS-ACTUAL!A3:G',
         tablaL: 'INST-HISTORIAL!A3:H',
         tablaM: 'KPI!A3:E',
@@ -1013,7 +1014,6 @@ const ranges = [
     { range: 'CAO-INT-VIGENTES!A4:A1048576', elementId: 'CAOInterVig-count' },
     { range: 'CAO-MIL-VIGENTES!A4:A1048576', elementId: 'CAOMilVig-count' },
     { range: 'MP-VIGENTES!A4:A1048576', elementId: 'NumManProc-count' },
-    { range: 'ATCO!A4:A1048576', elementId: 'NumAtco-count' },
     { range: 'INS-ACTUAL!A4:A1048576', elementId: 'NumInst-count' }
     
 ];
@@ -1039,6 +1039,37 @@ function CountElementsTable(range, elementId) {
 ranges.forEach(item => {
     CountElementsTable(item.range, item.elementId);
 });
+
+const rangesNUMATCO = [
+    { range: 'LISTADO!A2:A1048576', elementId: 'NumAtco-count' }
+];
+function CountElementsTableNUMATCO(range, elementId) {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${API_KEY}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            if (rows && rows.length > 0) {
+                const count = rows.length;
+                document.getElementById(elementId).textContent = count;
+            } else {
+                console.log(`No se encontraron datos en el rango: ${range}`);
+                document.getElementById(elementId).textContent = 0;
+            }
+        })
+        .catch(error => {
+            console.error(`Error al obtener los datos de ${range}:`, error);
+            document.getElementById(elementId).textContent = 'Error';
+        });
+}
+rangesNUMATCO.forEach(item => {
+    CountElementsTableNUMATCO(item.range, item.elementId);
+});
+
+
+
+
+
 
 //***************GRAFICOS CIRCULARES NIVEL DE COMPETENCIA LINGUISTICA***************                  
 function crearGraficaCircular(rango, canvasId, hoverColors) {
@@ -1247,99 +1278,143 @@ observer.observe(sectionGrafica);
     
 
 
-        
-        const ATMLISTranges = ["LISTADO!B:M","LISTADO!O:Q", "LISTADO!S:X"];
-        
-        async function fetchDataATMLIST() {
-            try {
-                const responses = await Promise.all(
-                    ATMLISTranges.map(range => 
-                        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${API_KEY}`)
-                            .then(response => response.json())
-                    )
-                );
-                
-                const mergedData = mergeDataATMLIST(responses[0].values, responses[1].values, responses[2].values);
-                populateTableATMLIST(mergedData);
-            } catch (error) {
-                console.error("Error al obtener los datos: ", error);
-            }
-        }
-        
-        function mergeDataATMLIST(range1, range2, range3) {
-            const maxLength = Math.max(range1.length, range2.length, range3.length);
-            let merged = [];
-            
-            for (let i = 0; i < maxLength; i++) {
-                const row1 = range1[i] || [];
-                const row2 = range2[i] || [];
-                const row3 = range3[i] || [];
-                merged.push([...row1, ...row2, ...row3]);
-            }
-            return merged;
-        }
-        
-        function populateTableATMLIST(data) {
-            const headerRow = document.getElementById("headerRowATMLIST");
-            const tableBody = document.getElementById("tableBodyATMLIST");
-            
-            headerRow.innerHTML = "";
-            tableBody.innerHTML = "";
-            
-            if (data.length > 0) {
-                data[0].forEach(header => {
-                    let th = document.createElement("th");
-                    th.textContent = header;
-                    headerRow.appendChild(th);
-                });
-                
-                data.slice(1).forEach(row => {
-                    let tr = document.createElement("tr");
-                    row.forEach(cell => {
-                        let td = document.createElement("td");
-                        if (/^(https?:\/\/\S+)$/i.test(cell)) {
-                            let a = document.createElement("a");
-                            a.href = cell;
-                            a.target = "_blank";
-                            let icon = document.createElement("i");
-                            icon.className = "fas fa-file-alt icon-link";
-                            a.appendChild(icon);
-                            td.appendChild(a);
 
-                        } else if (/^[a-zA-Z0-9-_]{33}$/.test(cell)) {
-                            let a = document.createElement("a");
-                            a.href = `https://drive.google.com/file/d/${cell}/view?usp=drive_link`;
-                            a.target = "_blank";
-                            let icon = document.createElement("i");
-                            icon.className = "fas fa-user icon-link";
-                            a.appendChild(icon);
-                            td.appendChild(a);
+const ATMLISTranges = ["LISTADO!B:M","LISTADO!O:Q", "LISTADO!S:X"];
 
-                        } else if (cell.includes('@')) {
-                            let a = document.createElement("a");
-                            a.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${cell}`;
-                            a.target = "_blank";
-                            let icon = document.createElement("i");
-                            icon.className = "fas fa-envelope icon-link";
-                            a.appendChild(icon);
-                            td.appendChild(a);
-                        } else {
-                            td.textContent = cell;
-                        }
-                        tr.appendChild(td);
-                    });
-                    tableBody.appendChild(tr);
-                });
-            }
-        }
-        function filterTableATMLIST() {
-            let input = document.getElementById("searchInputATMLIST").value.toLowerCase();
-            let rows = document.querySelectorAll("#tableBodyATMLIST tr");
+async function fetchDataATMLIST() {
+    try {
+        const responses = await Promise.all(
+            ATMLISTranges.map(range => 
+                fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${API_KEY}`)
+                    .then(response => response.json())
+            )
+        );
+        
+        const mergedData = mergeDataATMLIST(responses[0].values, responses[1].values, responses[2].values);
+        populateTableATMLIST(mergedData);
+    } catch (error) {
+        console.error("Error al obtener los datos: ", error);
+    }
+}
 
-            rows.forEach(row => {
-                let text = row.textContent.toLowerCase();
-                row.style.display = text.includes(input) ? "" : "none";
+function mergeDataATMLIST(range1, range2, range3) {
+    const maxLength = Math.max(range1.length, range2.length, range3.length);
+    let merged = [];
+    
+    for (let i = 0; i < maxLength; i++) {
+        const row1 = range1[i] || [];
+        const row2 = range2[i] || [];
+        const row3 = range3[i] || [];
+        merged.push([...row1, ...row2, ...row3]);
+    }
+    return merged;
+}
+
+function populateTableATMLIST(data) {
+    const headerRow = document.getElementById("headerRowATMLIST");
+    const tableBody = document.getElementById("tableBodyATMLIST");
+    
+    headerRow.innerHTML = "";
+    tableBody.innerHTML = "";
+    
+    if (data.length > 0) {
+        data[0].forEach(header => {
+            let th = document.createElement("th");
+            th.textContent = header;
+            headerRow.appendChild(th);
+        });
+        
+        data.slice(1).forEach(row => {
+            let tr = document.createElement("tr");
+            row.forEach(cell => {
+                let td = document.createElement("td");
+                if (/^(https?:\/\/\S+)$/i.test(cell)) {
+                    let a = document.createElement("a");
+                    a.href = cell;
+                    a.target = "_blank";
+                    let icon = document.createElement("i");
+                    icon.className = "fas fa-file-alt icon-link";
+                    a.appendChild(icon);
+                    td.appendChild(a);
+
+                } else if (/^[a-zA-Z0-9-_]{33}$/.test(cell)) {
+                    let a = document.createElement("a");
+                    a.href = `https://drive.google.com/file/d/${cell}/view?usp=drive_link`;
+                    a.target = "_blank";
+                    let icon = document.createElement("i");
+                    icon.className = "fas fa-user icon-link";
+                    a.appendChild(icon);
+                    td.appendChild(a);
+
+                } else if (cell.includes('@')) {
+                    let a = document.createElement("a");
+                    a.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${cell}`;
+                    a.target = "_blank";
+                    let icon = document.createElement("i");
+                    icon.className = "fas fa-envelope icon-link";
+                    a.appendChild(icon);
+                    td.appendChild(a);
+                } else {
+                    td.textContent = cell;
+                }
+                tr.appendChild(td);
             });
-        }       
+            tableBody.appendChild(tr);
+        });
+    }
+}
+function filterTableATMLIST() {
+    let input = document.getElementById("searchInputATMLIST").value.toLowerCase();
+    let rows = document.querySelectorAll("#tableBodyATMLIST tr");
+
+    rows.forEach(row => {
+        let text = row.textContent.toLowerCase();
+        row.style.display = text.includes(input) ? "" : "none";
+    });
+}    
+
+//***************FUNCION QUE CREA LAS TABLAS DE LISTAS ATCO**************
+function fetchDataDOCUMENTSAtco(option) {
+    const sheetNames = {
+        tabla1: 'ROL DE TURNOS!A3:J1001',
+    };
+    const sheetName = sheetNames[option];
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${API_KEY}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const rows = data.values;
+            let tableHTML = '<table><tr>';
+            rows[0].forEach(header => {
+                tableHTML += `<th>${header}</th>`;
+            });
+            tableHTML += '</tr>';
+            for (let i = 1; i < rows.length; i++) {
+                tableHTML += '<tr>';
+                rows[i].forEach(cell => {
+                    if (cell.startsWith('http') && (cell.includes('.com') || cell.includes('.org')|| cell.includes('.bo'))) {
+                        //***************SI ES UNA URL LE PONDRA ICONO DE DOCUMENTO***************
+                        tableHTML += `<td><a class="icon-link" href="${cell}" target="_blank"><i class="fas fa-file-alt"></i></a></td>`;
+                    } 
+                    else if (cell.includes('@')) {
+                        //***************SI HAY ALGUNA @ LE PONDRA ICONO DE MAIL***************
+                        tableHTML += `<td><a class="icon-link" href="mailto:${cell}" target="_blank"><i class="fas fa-envelope"></i></a></td>`;
+                    } 
+                    else if (/^[a-zA-Z0-9-_]{33}$/.test(cell)) {
+                        //***************SI ES LA ID DE UNA URL(SOLO LA ID) LE PONDRA ICONO DE PERSONA, PUES DEBERA SER UNA FOTO***************
+                        tableHTML += `<td><a class="icon-link" href="https://drive.google.com/file/d/${cell}/view?usp=drive_link" target="_blank"><i class="fas fa-user"></i></a></td>`;
+                    } 
+                    else {
+                        tableHTML += `<td>${cell}</td>`;
+                    }
+                });
+                tableHTML += '</tr>';
+            }
+            tableHTML += '</table>';
+            document.getElementById(`data${option.slice(-1)}`).innerHTML = tableHTML;
+            showContent(option);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}   
 </script>
 </html>
