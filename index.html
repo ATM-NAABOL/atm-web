@@ -767,6 +767,7 @@
 //***************DATOS SENCIBLES*************** 
 const API_KEY = 'AIzaSyBJuRk7BogPQDlwwPdmi9_wru1Y75xspZw';
 const SPREADSHEET_ID = '1yIIbD_56ze6FsHR6WKeId5ZyGwgq8qU7DXmCMwfTSPo';
+const sheetId = "1v2Xlmx5YdJ4jjUI9TEGAzHpZR0dLcjmwAj41PPq2CK4";
 
 //***************OPCIONES POR DEFECTO AL CARGAR LA PAGINA***************
 showSection('Inicio');
@@ -1041,7 +1042,7 @@ ranges.forEach(item => {
 
 //***************GRAFICOS CIRCULARES NIVEL DE COMPETENCIA LINGUISTICA***************                  
 function crearGraficaCircular(rango, canvasId, hoverColors) {
-    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${rango}?key=${API_KEY}`)
+    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${rango}?key=${API_KEY}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al cargar los datos');
@@ -1105,13 +1106,13 @@ const hoverColors4 = ['#005D8E'];
 const hoverColors5 = ['#4C9A2A'];
 const hoverColors6 = ['#FFB81C'];
 const hoverColors7 = ['#D32F2F'];
-crearGraficaCircular('GRAFICOS.ATCO!G6:H9', 'myPieChart1', hoverColors1);//ACC SLLP SLCB SLVR
-crearGraficaCircular('GRAFICOS.ATCO!J6:K9', 'myPieChart2', hoverColors2);//ATO SECUNDARIOS
-crearGraficaCircular('GRAFICOS.ATCO!M6:N9', 'myPieChart3', hoverColors3);//DATOS GENERALES
-crearGraficaCircular('GRAFICOS.ATCO!L18:M21', 'myPieChart4', hoverColors4);//REGIONAL LA PAZ
-crearGraficaCircular('GRAFICOS.ATCO!L24:M27', 'myPieChart5', hoverColors5);//REGIONAL COCHABAMBA
-crearGraficaCircular('GRAFICOS.ATCO!L30:M33', 'myPieChart6', hoverColors6);//REGIONAL BENI
-crearGraficaCircular('GRAFICOS.ATCO!L36:M39', 'myPieChart7', hoverColors7);//REGIONAL SANTA CRUZ
+crearGraficaCircular('GRAFICOS!G6:H9', 'myPieChart1', hoverColors1);//ACC SLLP SLCB SLVR
+crearGraficaCircular('GRAFICOS!J6:K9', 'myPieChart2', hoverColors2);//ATO SECUNDARIOS
+crearGraficaCircular('GRAFICOS!M6:N9', 'myPieChart3', hoverColors3);//DATOS GENERALES
+crearGraficaCircular('GRAFICOS!L14:M17', 'myPieChart4', hoverColors4);//REGIONAL LA PAZ
+crearGraficaCircular('GRAFICOS!L20:M23', 'myPieChart5', hoverColors5);//REGIONAL COCHABAMBA
+crearGraficaCircular('GRAFICOS!L26:M29', 'myPieChart6', hoverColors6);//REGIONAL BENI
+crearGraficaCircular('GRAFICOS!L32:M35', 'myPieChart7', hoverColors7);//REGIONAL SANTA CRUZ
 
 //***************GRAFICOS DE BARRA NIVEL DE COMPETENCIA LINGUISTICA POR REGIONALES - AEROPUERTO***************
 const backgroundColorsGrafica = [
@@ -1130,7 +1131,7 @@ const hoverColorsGrafica = [
     'rgba(255, 159, 64, 1)'
 ];
 function fetchSheetDataGrafica(rangeGrafica, chartContainerIdGrafica, chartTypeGrafica = 'bar') {
-    const urlGrafica = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${rangeGrafica}?key=${API_KEY}`;
+    const urlGrafica = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${rangeGrafica}?key=${API_KEY}`;
     fetch(urlGrafica)
         .then(response => response.json())
         .then(data => {
@@ -1211,10 +1212,10 @@ function createChartGrafica(labelsGrafica, datasetsGrafica, chartContainerIdGraf
 }
 function loadGraphsGrafica() {
     const rangesGrafica = [
-        { rangeGrafica: 'GRAFICOS.ATCO!A17:K21', containerIdGrafica: 'chart1', typeGrafica: 'bar', titleGrafica: 'REGIONAL LA PAZ' },
-        { rangeGrafica: 'GRAFICOS.ATCO!A23:K27', containerIdGrafica: 'chart2', typeGrafica: 'bar', titleGrafica: 'REGIONAL COCHABAMBA' },
-        { rangeGrafica: 'GRAFICOS.ATCO!A29:K33', containerIdGrafica: 'chart3', typeGrafica: 'bar', titleGrafica: 'REGIONAL BENI' },
-        { rangeGrafica: 'GRAFICOS.ATCO!A35:K39', containerIdGrafica: 'chart4', typeGrafica: 'bar', titleGrafica: 'REGIONAL SANTA CRUZ' },
+        { rangeGrafica: 'GRAFICOS!A13:K17', containerIdGrafica: 'chart1', typeGrafica: 'bar', titleGrafica: 'REGIONAL LA PAZ' },
+        { rangeGrafica: 'GRAFICOS!A19:K23', containerIdGrafica: 'chart2', typeGrafica: 'bar', titleGrafica: 'REGIONAL COCHABAMBA' },
+        { rangeGrafica: 'GRAFICOS!A25:K29', containerIdGrafica: 'chart3', typeGrafica: 'bar', titleGrafica: 'REGIONAL BENI' },
+        { rangeGrafica: 'GRAFICOS!A31:K35', containerIdGrafica: 'chart4', typeGrafica: 'bar', titleGrafica: 'REGIONAL SANTA CRUZ' },
     ];
     rangesGrafica.forEach((rangeGrafica) => {
         const titleElementGrafica = document.createElement('h3');
@@ -1246,15 +1247,14 @@ observer.observe(sectionGrafica);
     
 
 
-        const sheetId = "1v2Xlmx5YdJ4jjUI9TEGAzHpZR0dLcjmwAj41PPq2CK4";
-        const apiKey = "AIzaSyBJuRk7BogPQDlwwPdmi9_wru1Y75xspZw";
+        
         const ATMLISTranges = ["LISTADO!B:M","LISTADO!O:Q", "LISTADO!S:X"];
         
         async function fetchDataATMLIST() {
             try {
                 const responses = await Promise.all(
                     ATMLISTranges.map(range => 
-                        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`)
+                        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${API_KEY}`)
                             .then(response => response.json())
                     )
                 );
