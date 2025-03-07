@@ -475,70 +475,70 @@
     <!--***************LOGO NAABOL***************-->
     <img src="https://naabol.gob.bo/wp-content/uploads/2024/08/Recurso-11@0.5x-8.png" alt="Logo">
     <!--***************OPCIONES DEL MENU LATERAL***************-->
-    <div class="opcion">
+    <div id="menu1">
         <div class="title1">CARTAS DE ACUERDO OPERACIONAL</div>
-        <a id="menu1" class="menu" href="#" onclick="toggleSubmenu('menu1-1'); resetActiveMenu();setActive('menu1')"><i class="fas fa-handshake"></i> CAO</a>
+        <a id="opcion1" class="menu" href="#" onclick="toggleSubmenu('menu1-1'); resetActiveMenu();setActive('opcion1')"><i class="fas fa-handshake"></i> CAO</a>
        
             <div id="menu1-1" class="submenu">
                 <a href="#" id="opcion1-1" onclick="resetActive(); toggleSubSubmenu('menu1-1-1'); setActive('opcion1-1')"><i class="fas fa-chevron-down"></i> NACIONALES</a>
                 <div id="menu1-1-1" class="subsubmenu">
-                    <a href="#" onclick="showSection('opcion1-1-1');setActive('opcion1-1');fetchData('tablaA')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-                    <a href="#" onclick="showSection('opcion1-1-2');setActive('opcion1-1');fetchData('tablaB')"><i class="fas fa-caret-right"></i> Documentos Pasados</a></div>
+                    <a href="#" onclick="showSection('contenido1-1-1');setActive('opcion1-1');fetchData('tablaA')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+                    <a href="#" onclick="showSection('contenido1-1-2');setActive('opcion1-1');fetchData('tablaB')"><i class="fas fa-caret-right"></i> Documentos Pasados</a></div>
 
                 <a href="#" id="opcion1-2" onclick="resetActive(); toggleSubSubmenu('menu1-1-2'); setActive('opcion1-2')"><i class="fas fa-chevron-down"></i>INTERNACIONALES</a>
                 <div id="menu1-1-2" class="subsubmenu">
-                    <a href="#" onclick="showSection('opcion1-2-1'); setActive('opcion1-2');fetchData('tablaC')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-                    <a href="#" onclick="showSection('opcion1-2-2'); setActive('opcion1-2');fetchData('tablaD')"><i class="fas fa-caret-right"></i> Documentos Pasados</a></div>
+                    <a href="#" onclick="showSection('contenido1-2-1'); setActive('opcion1-2');fetchData('tablaC')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+                    <a href="#" onclick="showSection('contenido1-2-2'); setActive('opcion1-2');fetchData('tablaD')"><i class="fas fa-caret-right"></i> Documentos Pasados</a></div>
 
                 <a href="#" id="opcion1-3" onclick="resetActive(); toggleSubSubmenu('menu1-1-3'); setActive('opcion1-3')"><i class="fas fa-chevron-down"></i> ORGANISMOS MILITARES</a>
                 <div id="menu1-1-3" class="subsubmenu">
-                    <a href="#" onclick="showSection('opcion1-3-1'); setActive('opcion1-3');fetchData('tablaE')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-                    <a href="#" onclick="showSection('opcion1-3-2'); setActive('opcion1-3');fetchData('tablaF')"><i class="fas fa-caret-right"></i> Documentos Pasados</a></div>
+                    <a href="#" onclick="showSection('contenido1-3-1'); setActive('opcion1-3');fetchData('tablaE')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+                    <a href="#" onclick="showSection('contenido1-3-2'); setActive('opcion1-3');fetchData('tablaF')"><i class="fas fa-caret-right"></i> Documentos Pasados</a></div>
 
             </div>
     </div>
 
-    <div class="opcion">
+    <div class="menu2">
         <div class="title1">MANUALES Y PROCEDIMIENTOS</div>
-        <a id="menu2" class="menu" href="#" onclick="toggleSubmenu('menu2-1'); resetActiveMenu();setActive('menu2')"><i class="fas fa-book"></i>  MP</a>
+        <a id="opcion2" class="menu" href="#" onclick="toggleSubmenu('menu2-1'); resetActiveMenu();setActive('opcion2')"><i class="fas fa-book"></i>  MP</a>
         <div id="menu2-1" class="submenu">
-            <a href="#" onclick="showSection('opcion2-1'); fetchData('tablaG')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
-            <a href="#" onclick="showSection('opcion2-2'); fetchData('tablaH')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
+            <a href="#" onclick="showSection('contenido2-1'); fetchData('tablaG')"><i class="fas fa-caret-right"></i> Documentos Vigentes</a>
+            <a href="#" onclick="showSection('contenido2-2'); fetchData('tablaH')"><i class="fas fa-caret-right"></i> Documentos Pasados</a>
         </div>
     </div>
-    <div class="opcion">
+    <div class="menu3">
         <div class="title1">CONTROLADORES DE TRANSITO AEREO</div>
-        <a id="menu3" class="menu" href="#" onclick="toggleSubmenu('menu3-1'); resetActiveMenu();setActive('menu3')"><i class="fas fa-users"></i>  ATCO's</a>
+        <a id="opcion3" class="menu" href="#" onclick="toggleSubmenu('menu3-1'); resetActiveMenu();setActive('opcion3')"><i class="fas fa-users"></i>  ATCO's</a>
         <div id="menu3-1" class="submenu">
-            <a href="#" onclick="showSection('opcion3-1'); HideSearch(); fetchDataATMLIST(); HideSearch()"><i class="fas fa-caret-right"></i> Listado del Personal</a>
-            <a href="#" onclick="showSection('opcion3-2');fetchDataDOCUMENTSAtco('tabla1')"><i class="fas fa-caret-right"></i> Rol de Turnos</a>
-            <a href="#" onclick="showSection('opcion3-3'); HideSearch()"><i class="fas fa-caret-right"></i> Graficos estadisticos</a>
+            <a href="#" onclick="showSection('contenido3-1'); HideSearch(); fetchDataATMLIST(); HideSearch()"><i class="fas fa-caret-right"></i> Listado del Personal</a>
+            <a href="#" onclick="showSection('contenido3-2');fetchDataDOCUMENTSAtco('tabla1')"><i class="fas fa-caret-right"></i> Rol de Turnos</a>
+            <a href="#" onclick="showSection('contenido3-3'); HideSearch()"><i class="fas fa-caret-right"></i> Graficos estadisticos</a>
         </div>
     </div>
-    <div class="opcion">
+    <div class="menu4">
         <div class="title1">INSTRUCTIVOS AL PERSONAL</div>
-        <a id="menu4" class="menu" href="#" onclick="toggleSubmenu('menu4-1'); resetActiveMenu();resetActive();setActive('menu4')"><i class="fas fa-file-alt"></i>  INSTRUCTIVOS</a>
+        <a id="opcion4" class="menu" href="#" onclick="toggleSubmenu('menu4-1'); resetActiveMenu();resetActive();setActive('opcion4')"><i class="fas fa-file-alt"></i>  INSTRUCTIVOS</a>
         <div id="menu4-1" class="submenu">
-            <a href="#" onclick="showSection('opcion4-1'); fetchData('tablaK')"><i class="fas fa-caret-right"></i> Instructivos en la gestión</a>
-            <a href="#" onclick="showSection('opcion4-2'); fetchData('tablaL')"><i class="fas fa-caret-right"></i> Historial de instructivos</a>
+            <a href="#" onclick="showSection('contenido4-1'); fetchData('tablaK')"><i class="fas fa-caret-right"></i> Instructivos en la gestión</a>
+            <a href="#" onclick="showSection('contenido4-2'); fetchData('tablaL')"><i class="fas fa-caret-right"></i> Historial de instructivos</a>
         </div>
     </div>
-    <div class="opcion">
+    <div class="menu5">
         <div class="title1">INDICADORES CLAVE DE RENDIMIENTO</div>
-        <a id="menu5" class="menu" href="#" onclick="toggleSubmenu('menu5-1'); resetActiveMenu();setActive('menu5')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
+        <a id="opcion5" class="menu" href="#" onclick="toggleSubmenu('menu5-1'); resetActiveMenu();setActive('opcion5')"><i class="fas fa-chart-line"></i>  KPI's TMA</a>
         <div id="menu5-1" class="submenu">
-            <a href="#" onclick="showSection('opcion5-1'); HideSearch()"><i class="fas fa-caret-right"></i> KPI's BOLIVIA</a>
-            <a href="#" onclick="showSection('opcion5-2'); fetchData('tablaM')"><i class="fas fa-caret-right"></i> DOCUMENTOS KPI's</a>
+            <a href="#" onclick="showSection('contenido5-1'); HideSearch()"><i class="fas fa-caret-right"></i> KPI's BOLIVIA</a>
+            <a href="#" onclick="showSection('contenido5-2'); fetchData('tablaM')"><i class="fas fa-caret-right"></i> DOCUMENTOS KPI's</a>
         </div>
     </div>
 
-    <div class="opcion">
+    <div class="menu6">
         <div class="title1">MEDIDAS ATFM</div>
-        <a id="menu6" class="menu" href="#" onclick="ocultarMenu();showSection('opcion6'); resetActiveMenu(); resetActive(); setActive('opcion6'); HideSearch()"><i class="fas fa-bullseye"></i>  ATFM</a>
+        <a id="opcion6" class="menu" href="#" onclick="ocultarMenu();showSection('contenido6'); resetActiveMenu(); resetActive(); setActive('opcion6'); HideSearch()"><i class="fas fa-bullseye"></i>  ATFM</a>
     </div>
-    <div class="opcion">
+    <div class="menu7">
          <div class="title1">DOCUMENTOS NO PERTENECIENTES A ATM</div>
-        <a id="menu7" class="menu" href="#" onclick="ocultarMenu();showSection('opcion7'); resetActiveMenu(); resetActive(); setActive('opcion7'); fetchData('tablaN')"><i class="fas fa-folder-open"></i>  DOCUMENTOS</a>
+        <a id="opcion7" class="menu" href="#" onclick="ocultarMenu();showSection('contenido7'); resetActiveMenu(); resetActive(); setActive('opcion7'); fetchData('tablaN')"><i class="fas fa-folder-open"></i>  DOCUMENTOS</a>
     </div>
 <!--
     <div class="opcion">
@@ -550,7 +550,7 @@
 <!--***************AREA DEL CONTENIDO*************** -->
 <div class="content">
     <!--***************SECCION QUE SE MUESTRA AL CARGAR LA PAGINA*************** -->
-    <div id="Inicio"class="section">
+    <div id="Inicio"class="contenido">
         <h3>Documentacion ATM - NAABOL</h3>
         <p>Seleccione la opcion de su interes en el menu lateral</p>
         <div class="card-container">
@@ -603,47 +603,47 @@
         <i class="fas fa-search"></i>
     </div>
     <!--***************CONTENIDO DE LAS OPCIONES***************-->
-    <div id="opcion1-1-1" class="section">
+    <div id="contenido1-1-1" class="contenido">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>NACIONALES - DOCUMENTOS VIGENTES</p>
         <div id="dataA" class="tabla"></div>
     </div>
-    <div id="opcion1-1-2" class="section">
+    <div id="contenido1-1-2" class="contenido">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>NACIONALES - DOCUMENTOS PASADOS</p>
         <div id="dataB" class="tabla"></div>
     </div>
-    <div id="opcion1-2-1" class="section">
+    <div id="contenido1-2-1" class="contenido">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>INTERNACIONALES - DOCUMENTOS VIGENTES</p>
         <div id="dataC" class="tabla"></div>
     </div>
-        <div id="opcion1-2-2" class="section">
+        <div id="contenido1-2-2" class="contenido">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>INTERNACIONALES - DOCUMENTOS PASADOS</p>
         <div id="dataD" class="tabla"></div>
     </div>
-    <div id="opcion1-3-1" class="section">
+    <div id="contenido1-3-1" class="contenido">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>ORGANISMOS MILITARES - DOCUMENTOS VIGENTES</p>
         <div id="dataE" class="tabla"></div>
     </div>
-        <div id="opcion1-3-2" class="section">
+        <div id="contenido1-3-2" class="contenido">
         <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
         <p>ORGANISMOS MILITARES - DOCUMENTOS PASADOS</p>
         <div id="dataF" class="tabla"></div>
     </div>
-    <div id="opcion2-1" class="section">
-        <h3>MANUALiES Y PROCEDIMIENTOS</h3>
+    <div id="contenido2-1" class="contenido">
+        <h3>MANUALES Y PROCEDIMIENTOS</h3>
         <p>DOCUMENTOS VIGENTES</p>
         <div id="dataG" class="tabla"></div>
     </div>
-    <div id="opcion2-2" class="section">
+    <div id="contenido2-2" class="contenido">
         <h3>MANUALES Y PROCEDIMIENTOS</h3>
         <p>DOCUMENTOS PASADOS</p>
         <div id="dataH" class="tabla"></div>
     </div>
-    <div id="opcion3-1" class="section">
+    <div id="contenido3-1" class="contenido">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
         <p>LISTADO DEL PERSONAL</p>
         <div class="search-containerATMLIST">
@@ -659,12 +659,12 @@
         </table>
         <a href="https://naabol.noloco.co/atco" class="floating-button">+</a>
     </div>
-    <div id="opcion3-2" class="section">
+    <div id="contenido3-2" class="contenido">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
         <p>ROL DE TURNOS</p>
         <div id="data1" class="tabla"></div>
     </div>
-    <div id="opcion3-3" class="section">
+    <div id="contenido3-3" class="contenido">
         <h3>CONTROLADORES DE TRANSITO AEREO</h3>
         <p>GRAFICOS ESTADISTICOS</p>
         <div class="graficasgroup">
@@ -707,39 +707,38 @@
         </div>
     </div>
 
-    <div id="opcion4-1" class="section">
+    <div id="contenido4-1" class="contenido">
         <h3>INSTRUCCTIVOS AL PERSONAL</h3>
         <p>INSTRUCTIVOS VIGENTES</p>
         <div id="dataK" class="tabla"></div>
     </div>
-    <div id="opcion4-2" class="section">
+    <div id="contenido4-2" class="contenido">
         <h3>INSTRUCCTIVOS AL PERSONAL</h3>
         <p>INSTRUCTIVAS ARCHIVADAS</p>
         <div id="dataL" class="tabla"></div>
     </div>
-    <div id="opcion5-1" class="section">
+    <div id="contenido5-1" class="contenido">
         <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
         <p>KPI's BOLIVIA</p>
             <iframe src="https://www.canva.com/design/DAGDSVbIs9Y/R6LVGZuKXxkDOcD2T06AlQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
     </div>
-    <div id="opcion5-2" class="section">
+    <div id="contenido5-2" class="contenido">
         <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
         <p>DOCUMENTO KPI's</p>
         <div id="dataM" class="tabla"></div>
     </div>
-    <div id="opcion6" class="section">
+    <div id="contenido6" class="contenido">
         <h3>MEDIDAS ATFM SAM</h3>
         <p>PLAN DE OPERACIONES ATFM PARA LA REGION SAM</p>
         <iframe src="https://app.powerbi.com/view?r=eyJrIjoiOTc4YTZhMTQtZmE0YS00ZDUzLWI3NzgtNjIxYWZlYjU2OGI2IiwidCI6IjI2MjI4ZGNhLTcwZDMtNDkxNy04MjMzLTA4M2FjMzY1NWE5MSJ9" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
     </div>
-    <div id="opcion7" class="section">
+    <div id="contenido7" class="contenido">
         <h3>DOCUMENTOS NO OPERATIVOS</h3>
         <p>DOCUMENTACION VIGENTE</p>
         <div id="dataN" class="tabla"></div>
-        <iframe src="https://docs.google.com/document/d/e/2PACX-1vQW3i_c7_PVCieUbkir0CgIUy90nzs1-AcdAHO5EmqSimCPOjZ91WUCIbfoyzJOxg/pub" width="100%" height="auto"></iframe>
 
     </div>
-    <div id="opcion8" class="section">
+    <div id="contenido8" class="contenido">
         <h3>OBJETIVOS ATM-ACC</h3>
         <p>Objetivos de control de transito aereo</p>
         <p1>NAABOL brinda servicios de accesibilidad al transporte aéreo nacional e internacional, con atención de calidad a través de un equipamiento e infraestructura aeronáutica moderna que cuenta con tecnología de punta para la navegación aérea. Contribuyendo a la integración de los Pueblos, en armonía con el medio ambiente y la Madre Tierra; bajo el marco de las normas aeronáuticas y los planes de gobierno.</p1>
@@ -748,7 +747,7 @@
         <div id="dataO" class="tabla"></div>
         <img src="avion.jpg">
     </div>
-    <div id="opcion9" class="section">
+    <div id="opcion9" class="contenido">
         <h3>EJEMPLO</h3>
         <p>AÑADIR NUEVA SECCION A PAGINA WEB</p>
         <p1>La Aviación: Un Mundo de Innovación y Conexión Global
@@ -763,7 +762,6 @@
     <p>&copy; 2024 Documentacion ATM (NAABOL). Todos los derechos reservados. Prohibida su reproduccion parcial o total.</p>
 </div>
 </body>
-
 <script>
 //***************DATOS SENCIBLES*************** 
 const API_KEY = 'AIzaSyBJuRk7BogPQDlwwPdmi9_wru1Y75xspZw';
@@ -906,7 +904,7 @@ function fetchData(option) {
 function showSection(sectionId) {
 
     lastsectionId = sectionId;
-    const sections = document.querySelectorAll('.section');
+    const sections = document.querySelectorAll('.contenido');
     const objeto = document.getElementById("display-search-container");
     sections.forEach(section => {
         section.style.display = 'none';
