@@ -230,7 +230,7 @@
         font-size: 10px;
     }
 /*LOGIN (USUARIO Y CONTRASEÑA)*/
-    .section, .login {
+    .contenido , .login {
         display: none;
         width: 100%;
         margin: 0;
@@ -910,7 +910,7 @@ function showSection(sectionId) {
         section.style.display = 'none';
     });
     //***************OPCIONES A LAS QUE SE REQUIERE LOGIN PARA ACCEDER***************
-    if (['opcion3-1', 'opcion3-2'].includes(sectionId) && !isLoggedIn) {
+    if (['contenido3-1', 'contenido3-2'].includes(sectionId) && !isLoggedIn) {
         // Guardamos la última opción solicitada
         localStorage.setItem('lastRequestedSection', sectionId);
         
