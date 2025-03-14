@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
@@ -78,6 +78,11 @@
 /*FORMATOS DE TEXTO DEL MENU LATERAL*/
     }
     .sidebar h1 {
+        text-align: center;
+        margin: 0 0 20px 0;
+        font-size: 18px;
+    }
+    .sidebar h2 {
         font-size: 15px;
         margin-bottom: 20px;
         text-align: center;
@@ -88,11 +93,6 @@
         font-weight: 700;
         letter-spacing: 1px;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    }
-    .sidebar h2 {
-        text-align: center;
-        margin: 0 0 20px 0;
-        font-size: 18px;
     }
     .sidebar a {
         text-decoration: none;
@@ -183,27 +183,42 @@
         color: #3498db;
     }
 /*FORMATOS DE TEXTO DEL CONTENIDO*/
-    .content h3 {
-        font-size: 34px;
+    .content h1 {
+        font-size: 36px;
         margin-bottom: 20px;
         font-weight: bold;
         color: #2c3e50; 
     }
     .content h2 {
-        font-size: 34px;
-        margin-bottom: 20px;
+        font-size: 30px;
+        line-height: 1.6;
+        color: #34495e;
         font-weight: bold;
-        color: #2c3e50; 
+        font-weight: 500;
     }
-    .content h1 {
-        font-size: 16px;
+    .content h3 {
+        font-size: 24px;
         margin-bottom: 20px;
         font-weight: bold;
         color: #2c3e50; 
         text-align: center;
     }
+    .content h4 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        font-weight: 500;
+        color: #2c3e50; 
+        font-weight: bold;
+    }
+    .content h5 {
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-weight: 500;
+        color: #2c3e50; 
+        font-weight: bold;
+    }
     .content p {
-        font-size: 28px;
+        font-size: 20px;
         line-height: 1.6;
         color: #34495e;
     }
@@ -551,44 +566,44 @@
 <div class="content">
     <!--***************SECCION QUE SE MUESTRA AL CARGAR LA PAGINA*************** -->
     <div id="Inicio"class="contenido">
-        <h3>Documentacion ATM - NAABOL</h3>
-        <p>Seleccione la opcion de su interes en el menu lateral</p>
+        <h1>Documentacion ATM - NAABOL</h1>
+        <h2>Seleccione la opcion de su interes en el menu lateral</h2>
         <div class="card-container">
             <div class="card">
                 <span class="flag-icon flag-icon-bo"  style="font-size: 50px ; filter:grayscale(80%)"></span>
-                <h1>CARTAS DE ACUERDO NACIONALES VIGENTES</h1>
+                <h5>CARTAS DE ACUERDO NACIONALES VIGENTES</h5>
                 <p id="CAONacVig-count">Cargando...</p>
             </div>
             <div class="card">
                 <i class="fas fa-globe-americas" style="font-size: 50px"></i>
-                <h1>CARTAS DE ACUERDO INTERNACIONALES VIGENTES</h1>
+                <h5>CARTAS DE ACUERDO INTERNACIONALES VIGENTES</h5>
                 <p id="CAOInterVig-count">Cargando...</p>
             </div>
             <div class="card">
                 <i class="fas fa-fighter-jet" style="font-size: 50px"></i>
-                <h1>CARTAS DE ACUERDO CON ORGANISMOS MILITARES VIGENTES</h1>
+                <h5>CARTAS DE ACUERDO CON ORGANISMOS MILITARES VIGENTES</h5>
                 <p id="CAOMilVig-count">Cargando...</p>
             </div>
             <div class="card">
                 <i class="fas fa-book" style="font-size: 50px"></i>
-                <h1>NUMERO DE MANUALES VIGENTES</h1>
+                <h5>NUMERO DE MANUALES VIGENTES</h5>
                 <p id="NumManProc-count">Cargando...</p>
             </div>
             <div class="card">
                 <i class="fas fa-users" style="font-size: 50px"></i>
-                <h1>NUMERO DE CONTROLADORES AEREOS</h1>
+                <h5>NUMERO DE CONTROLADORES AEREOS</h5>
                 <p id="NumAtco-count">Cargando...</p>
             </div>
             <div class="card">
                 <i class="fas fa-file-alt" style="font-size: 50px"></i>
-                <h1>NUMERO DE INSTRUCTIVAS</h1>
+                <h5>NUMERO DE INSTRUCTIVAS</h5>
                 <p id="NumInst-count">Cargando...</p>
             </div>
         </div>
     </div>
     <!--***************CAMPO PARA LOGIN (USUARIO Y CONTRASEÑA)***************-->
     <div id="login" class="login">
-        <h2>ATM LOGIN</h2>
+        <h1>ATM LOGIN</h1>
         <form onsubmit="return login(event)">
             <input type="text" id="username" placeholder="Usuario" required>
             <input type="password" id="password" placeholder="Contraseña" required>
@@ -604,48 +619,48 @@
     </div>
     <!--***************CONTENIDO DE LAS OPCIONES***************-->
     <div id="contenido1-1-1" class="contenido">
-        <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
-        <p>NACIONALES - DOCUMENTOS VIGENTES</p>
+        <h1>CARTAS DE ACUERDO OPERACIONAL</h1>
+        <h2>NACIONALES - DOCUMENTOS VIGENTES</h2>
         <div id="dataA" class="tabla"></div>
     </div>
     <div id="contenido1-1-2" class="contenido">
-        <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
-        <p>NACIONALES - DOCUMENTOS PASADOS</p>
+        <h1>CARTAS DE ACUERDO OPERACIONAL</h1>
+        <h2>NACIONALES - DOCUMENTOS PASADOS</h2>
         <div id="dataB" class="tabla"></div>
     </div>
     <div id="contenido1-2-1" class="contenido">
-        <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
-        <p>INTERNACIONALES - DOCUMENTOS VIGENTES</p>
+        <h1>CARTAS DE ACUERDO OPERACIONAL</h1>
+        <h2>INTERNACIONALES - DOCUMENTOS VIGENTES</h2>
         <div id="dataC" class="tabla"></div>
     </div>
         <div id="contenido1-2-2" class="contenido">
-        <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
-        <p>INTERNACIONALES - DOCUMENTOS PASADOS</p>
+        <h1>CARTAS DE ACUERDO OPERACIONAL</h1>
+        <h2>INTERNACIONALES - DOCUMENTOS PASADOS</h2>
         <div id="dataD" class="tabla"></div>
     </div>
     <div id="contenido1-3-1" class="contenido">
-        <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
-        <p>ORGANISMOS MILITARES - DOCUMENTOS VIGENTES</p>
+        <h1>CARTAS DE ACUERDO OPERACIONAL</h1>
+        <h2>ORGANISMOS MILITARES - DOCUMENTOS VIGENTES</h2>
         <div id="dataE" class="tabla"></div>
     </div>
         <div id="contenido1-3-2" class="contenido">
-        <h3>CARTAS DE ACUERDO OPERACIONAL</h3>
-        <p>ORGANISMOS MILITARES - DOCUMENTOS PASADOS</p>
+        <h1>CARTAS DE ACUERDO OPERACIONAL</h1>
+        <h2>ORGANISMOS MILITARES - DOCUMENTOS PASADOS</h2>
         <div id="dataF" class="tabla"></div>
     </div>
     <div id="contenido2-1" class="contenido">
-        <h3>MANUALES Y PROCEDIMIENTOS</h3>
-        <p>DOCUMENTOS VIGENTES</p>
+        <h1>MANUALES Y PROCEDIMIENTOS</h1>
+        <h2>DOCUMENTOS VIGENTES</h2>
         <div id="dataG" class="tabla"></div>
     </div>
     <div id="contenido2-2" class="contenido">
-        <h3>MANUALES Y PROCEDIMIENTOS</h3>
-        <p>DOCUMENTOS PASADOS</p>
+        <h1>MANUALES Y PROCEDIMIENTOS</h1>
+        <h2>DOCUMENTOS PASADOS</h2>
         <div id="dataH" class="tabla"></div>
     </div>
     <div id="contenido3-1" class="contenido">
-        <h3>CONTROLADORES DE TRANSITO AEREO</h3>
-        <p>LISTADO DEL PERSONAL</p>
+        <h1>CONTROLADORES DE TRANSITO AEREO</h1>
+        <h2>LISTADO DEL PERSONAL</h2>
         <div class="search-containerATMLIST">
             <input type="text" id="searchInputATMLIST" class="search-inputATMLIST" placeholder="Buscar..." onkeyup="filterTableATMLIST()">
             <i class="fas fa-search"></i>
@@ -660,86 +675,86 @@
         <a href="https://naabol.noloco.co/atco" class="floating-button">+</a>
     </div>
     <div id="contenido3-2" class="contenido">
-        <h3>CONTROLADORES DE TRANSITO AEREO</h3>
-        <p>ROL DE TURNOS</p>
+        <h1>CONTROLADORES DE TRANSITO AEREO</h1>
+        <h2>ROL DE TURNOS</h2>
         <div id="data1" class="tabla"></div>
     </div>
     <div id="contenido3-3" class="contenido">
-        <h3>CONTROLADORES DE TRANSITO AEREO</h3>
-        <p>GRAFICOS ESTADISTICOS</p>
+        <h1>CONTROLADORES DE TRANSITO AEREO</h1>
+        <h2>GRAFICOS ESTADISTICOS</h2>
         <div class="graficasgroup">
             <div class="graficacircular" style="width: 500px; ">
-                <h1>DATOS GENERALES A NIVEL NACIONAL - NIVEL DE COMPETENCIA LINGUISTICA</h1>
+                <h3>DATOS GENERALES A NIVEL NACIONAL - NIVEL DE COMPETENCIA LINGUISTICA</h3>
                 <canvas id="myPieChart3"></canvas>
             </div>
         </div>
         <div class="graficasgroup">
             <div class="graficacircular">
-                <h1>AEROPUERTOS INTERNACIONALES Y ACC </h1>
+                <h3>AEROPUERTOS INTERNACIONALES Y ACC </h3>
                 <canvas id="myPieChart1"></canvas>
             </div>
             <div class="graficacircular">
-                <h1>AEROPUERTOS SECUNDARIOS </h1>
+                <h3>AEROPUERTOS SECUNDARIOS </h3>
                 <canvas id="myPieChart2"></canvas>
             </div>
         </div>
-        <h3>COMPETENCIA LINGUISTICA POR REGIONAL - AEROPUERTO</h1>
+        <h1>COMPETENCIA LINGUISTICA POR REGIONAL - AEROPUERTO</h1>
         <div id="graficas" class="graficas">
             <div id="charts-container" class="graficas"></div>
         </div>
         <div class="graficasgroup">
             <div class="graficacircular">
-                <h1>REGIONAL LA PAZ </h1>
+                <h3>REGIONAL LA PAZ </h3>
                 <canvas id="myPieChart4"></canvas>
             </div>
             <div class="graficacircular">
-                <h1>REGIONAL COCHABAMBA </h1>
+                <h3>REGIONAL COCHABAMBA </h3>
                 <canvas id="myPieChart5"></canvas>
             </div>
             <div class="graficacircular">
-                <h1>REGIONAL BENI </h1>
+                <h3>REGIONAL BENI </h3>
                 <canvas id="myPieChart6"></canvas>
             </div>
             <div class="graficacircular">
-                <h1>REGIONAL SANTA CRUZ </h1>
+                <h3>REGIONAL SANTA CRUZ </h3>
                 <canvas id="myPieChart7"></canvas>
             </div>
         </div>
     </div>
 
     <div id="contenido4-1" class="contenido">
-        <h3>INSTRUCCTIVOS AL PERSONAL</h3>
+        <h1>INSTRUCCTIVOS AL PERSONAL</h1>
         <p>INSTRUCTIVOS VIGENTES</p>
         <div id="dataK" class="tabla"></div>
     </div>
     <div id="contenido4-2" class="contenido">
-        <h3>INSTRUCCTIVOS AL PERSONAL</h3>
+        <h1>INSTRUCCTIVOS AL PERSONAL</h1>
         <p>INSTRUCTIVAS ARCHIVADAS</p>
         <div id="dataL" class="tabla"></div>
     </div>
     <div id="contenido5-1" class="contenido">
-        <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
+        <h1>INDICADORES CLAVE DE RENDIMIENTO</h1>
         <p>KPI's BOLIVIA</p>
             <iframe src="https://www.canva.com/design/DAGDSVbIs9Y/R6LVGZuKXxkDOcD2T06AlQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
     </div>
     <div id="contenido5-2" class="contenido">
-        <h3>INDICADORES CLAVE DE RENDIMIENTO</h3>
+        <h1>INDICADORES CLAVE DE RENDIMIENTO</h1>
         <p>DOCUMENTO KPI's</p>
         <div id="dataM" class="tabla"></div>
     </div>
     <div id="contenido6" class="contenido">
-        <h3>MEDIDAS ATFM SAM</h3>
+        <h1>MEDIDAS ATFM SAM</h1>
         <p>PLAN DE OPERACIONES ATFM PARA LA REGION SAM</p>
         <iframe src="https://app.powerbi.com/view?r=eyJrIjoiOTc4YTZhMTQtZmE0YS00ZDUzLWI3NzgtNjIxYWZlYjU2OGI2IiwidCI6IjI2MjI4ZGNhLTcwZDMtNDkxNy04MjMzLTA4M2FjMzY1NWE5MSJ9" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
     </div>
     <div id="contenido7" class="contenido">
-        <h3>DOCUMENTOS NO OPERATIVOS</h3>
+        <h1>DOCUMENTOS NO OPERATIVOS</h1>
         <p>DOCUMENTACION VIGENTE</p>
         <div id="dataN" class="tabla"></div>
 
     </div>
     <div id="contenido8" class="contenido">
-        <h3>OBJETIVOS ATM-ACC</h3>
+        <h1>OBJETIVOS ATM-ACC</h1>
         <p>Objetivos de control de transito aereo</p>
         <p1>NAABOL brinda servicios de accesibilidad al transporte aéreo nacional e internacional, con atención de calidad a través de un equipamiento e infraestructura aeronáutica moderna que cuenta con tecnología de punta para la navegación aérea. Contribuyendo a la integración de los Pueblos, en armonía con el medio ambiente y la Madre Tierra; bajo el marco de las normas aeronáuticas y los planes de gobierno.</p1>
         
@@ -748,7 +763,7 @@
         <img src="avion.jpg">
     </div>
     <div id="opcion9" class="contenido">
-        <h3>EJEMPLO</h3>
+        <h1>EJEMPLO</h1>
         <p>AÑADIR NUEVA SECCION A PAGINA WEB</p>
         <p1>La Aviación: Un Mundo de Innovación y Conexión Global
             <br>La aviación es una de las industrias más fascinantes y cruciales en la era moderna. Desde sus inicios a principios del siglo XX hasta el día de hoy, ha transformado la manera en que las personas se mueven y las mercancías se transportan alrededor del mundo. Lo que comenzó con los experimentos de los hermanos Wright en 1903, quienes lograron el primer vuelo controlado y sostenido con una aeronave más pesada que el aire, ha evolucionado hasta convertirse en un sistema global de transporte que conecta continentes, facilita el comercio internacional y permite el desplazamiento rápido de personas, productos e ideas.
@@ -1413,6 +1428,7 @@ function fetchDataDOCUMENTSAtco(option) {
             showContent(option);
         })
         .catch(error => console.error('Error fetching data:', error));
-}   
+} 
+
 </script>
 </html>
